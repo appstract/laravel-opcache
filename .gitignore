@@ -1,0 +1,5 @@
+*.sublime-*
+build
+composer.lock
+docs
+vendor
