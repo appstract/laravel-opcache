@@ -1,18 +1,17 @@
 <?php
+
 namespace Appstract\Opcache\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Appstract\Opcache\OpcacheFacade as OPcache;
 
 /**
- * Class OpcacheController
- * @package Appstract\Opcache\Http\Controllers
+ * Class OpcacheController.
  */
 class OpcacheController extends Controller
 {
-
     /**
-     * Clear the OPcache
+     * Clear the OPcache.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -22,7 +21,7 @@ class OpcacheController extends Controller
     }
 
     /**
-     * Get config values
+     * Get config values.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -32,7 +31,7 @@ class OpcacheController extends Controller
     }
 
     /**
-     * Get status info
+     * Get status info.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -42,7 +41,7 @@ class OpcacheController extends Controller
     }
 
     /**
-     * Optimize
+     * Optimize.
      *
      * @return \Illuminate\Http\JsonResponse
      */

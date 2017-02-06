@@ -1,5 +1,7 @@
 <?php
+
 namespace Appstract\Opcache;
+
 use Illuminate\Support\Facades\Facade;
 
 /**

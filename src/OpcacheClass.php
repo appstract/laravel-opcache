@@ -5,12 +5,10 @@ namespace Appstract\Opcache;
 use File;
 
 /**
- * Class OpcacheClass
- * @package Appstract\Opcache
+ * Class OpcacheClass.
  */
 class OpcacheClass
 {
-
     /**
      * OpcacheClass constructor.
      */
@@ -20,7 +18,7 @@ class OpcacheClass
     }
 
     /**
-     * Clear the cache
+     * Clear the cache.
      *
      * @return bool
      */
@@ -30,7 +28,7 @@ class OpcacheClass
     }
 
     /**
-     * Get configuration values
+     * Get configuration values.
      *
      * @return mixed
      */
@@ -42,7 +40,7 @@ class OpcacheClass
     }
 
     /**
-     * Get status info
+     * Get status info.
      *
      * @return mixed
      */
@@ -54,7 +52,7 @@ class OpcacheClass
     }
 
     /**
-     * Precompile app (WIP)
+     * Precompile app (WIP).
      *
      * @return array
      */
@@ -78,15 +76,15 @@ class OpcacheClass
 
         $optimized = 0;
 
-        $files->each(function ($file) use(&$optimized) {
-            if(@opcache_compile_file($file)) {
+        $files->each(function ($file) use (&$optimized) {
+            if (@opcache_compile_file($file)) {
                 $optimized++;
             }
         });
 
         return [
             'total_files_count' => $files->count(),
-            'compiled_count'    => $optimized
+            'compiled_count'    => $optimized,
         ];
     }
 }

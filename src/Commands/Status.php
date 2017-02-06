@@ -2,9 +2,9 @@
 
 namespace Appstract\Opcache\Commands;
 
+use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Appstract\Opcache\OpcacheFacade         as OPcache;
-use GuzzleHttp\Client;
 
 class Status extends Command
 {
@@ -30,32 +30,30 @@ class Status extends Command
     public function handle()
     {
         $client = new Client();
-        $response = $client->get(config('app.url') . '/opcache-api/status');
+        $response = $client->get(config('app.url').'/opcache-api/status');
         $response = json_decode($response->getBody()->getContents());
 
-        if($response->result !== false) {
+        if ($response->result !== false) {
             $this->line('General:');
             $general = (array) $response->result;
             unset($general['memory_usage'], $general['interned_strings_usage'], $general['opcache_statistics']);
             $this->table(['key', 'value'], $this->parseTable($general));
 
-            $this->line(PHP_EOL . 'Memory usage:');
+            $this->line(PHP_EOL.'Memory usage:');
             $this->table(['key', 'value'], $this->parseTable($response->result->memory_usage));
 
-            $this->line(PHP_EOL . 'Interned strings usage:');
+            $this->line(PHP_EOL.'Interned strings usage:');
             $this->table(['key', 'value'], $this->parseTable($response->result->interned_strings_usage));
 
-            $this->line(PHP_EOL . 'Statistics:');
+            $this->line(PHP_EOL.'Statistics:');
             $this->table(['option', 'value'], $this->parseTable($response->result->opcache_statistics));
-        }
-        else{
+        } else {
             $this->error('No opcode cache status information available');
         }
-
     }
 
     /**
-     * Make up the table for console display
+     * Make up the table for console display.
      *
      * @param $input
      *
@@ -65,10 +63,10 @@ class Status extends Command
     {
         $input = (array) $input;
 
-        return array_map(function($key, $value) {
+        return array_map(function ($key, $value) {
             return [
                 'key'       => $key,
-                'value'     => $value
+                'value'     => $value,
             ];
         }, array_keys($input), $input);
     }

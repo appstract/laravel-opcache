@@ -2,8 +2,8 @@
 
 namespace Appstract\Opcache\Commands;
 
-use Illuminate\Console\Command;
 use GuzzleHttp\Client;
+use Illuminate\Console\Command;
 
 class Optimize extends Command
 {
@@ -31,15 +31,13 @@ class Optimize extends Command
         $this->line('Optimize started, this can take a while...');
 
         $client = new Client();
-        $response = $client->get(config('app.url') . '/opcache-api/optimize');
+        $response = $client->get(config('app.url').'/opcache-api/optimize');
         $response = json_decode($response->getBody()->getContents());
 
-        if($response->result) {
+        if ($response->result) {
             $this->info(sprintf('%s of %s files optimized', $response->result->total_files_count, $response->result->compiled_count));
-        }
-        else{
+        } else {
             $this->error('No opcode information available');
         }
-
     }
 }
