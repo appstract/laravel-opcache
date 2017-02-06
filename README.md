@@ -1,11 +1,11 @@
 # Laravel OPcache package
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/appstract/laravel-opcache.svg?style=flat-square)](https://packagist.org/packages/appstract/:package_name)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/appstract/laravel-opcache.svg?style=flat-square)](https://packagist.org/packages/appstract/laravel-opcache)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/appstract/laravel-opcache/master.svg?style=flat-square)](https://travis-ci.org/appstract/:package_name)
+[![Build Status](https://img.shields.io/travis/appstract/laravel-opcache/master.svg?style=flat-square)](https://travis-ci.org/appstract/laravel-opcache)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/xxxxxxxxx.svg?style=flat-square)](https://insight.sensiolabs.com/projects/xxxxxxxxx)
-[![Quality Score](https://img.shields.io/scrutinizer/g/appstract/laravel-opcache.svg?style=flat-square)](https://scrutinizer-ci.com/g/appstract/:package_name)
-[![Total Downloads](https://img.shields.io/packagist/dt/appstract/laravel-opcache.svg?style=flat-square)](https://packagist.org/packages/appstract/:package_name)
+[![Quality Score](https://img.shields.io/scrutinizer/g/appstract/laravel-opcache.svg?style=flat-square)](https://scrutinizer-ci.com/g/appstract/laravel-opcache)
+[![Total Downloads](https://img.shields.io/packagist/dt/appstract/laravel-opcache.svg?style=flat-square)](https://packagist.org/packages/appstract/laravel-opcache)
 
 This package contains some useful Artisan commands to work with PHP OPcache.
 
