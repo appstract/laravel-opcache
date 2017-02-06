@@ -3,7 +3,6 @@
 namespace Appstract\Opcache\Commands;
 
 use Illuminate\Console\Command;
-use Appstract\Opcache\OpcacheFacade as OPcache;
 use GuzzleHttp\Client;
 
 class Clear extends Command
