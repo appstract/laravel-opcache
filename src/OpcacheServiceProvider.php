@@ -2,8 +2,8 @@
 
 namespace Appstract\Opcache;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class OpcacheServiceProvider extends ServiceProvider
 {
@@ -17,7 +17,7 @@ class OpcacheServiceProvider extends ServiceProvider
                 Commands\Clear::class,
                 Commands\Config::class,
                 Commands\Status::class,
-                Commands\Optimize::class
+                Commands\Optimize::class,
             ]);
         }
     }
@@ -28,7 +28,7 @@ class OpcacheServiceProvider extends ServiceProvider
     public function register()
     {
         // bind facade
-        $this->app->bind('OPcache', function() {
+        $this->app->bind('OPcache', function () {
             return new OpcacheClass();
         });
 

@@ -2,8 +2,8 @@
 
 namespace Appstract\Opcache\Commands;
 
-use Illuminate\Console\Command;
 use GuzzleHttp\Client;
+use Illuminate\Console\Command;
 
 class Clear extends Command
 {
@@ -29,15 +29,13 @@ class Clear extends Command
     public function handle()
     {
         $client = new Client();
-        $response = $client->get(config('app.url') . '/opcache-api/clear');
+        $response = $client->get(config('app.url').'/opcache-api/clear');
         $response = json_decode($response->getBody()->getContents());
 
-        if($response->result !== false){
+        if ($response->result !== false) {
             $this->info('Opcode cache cleared');
-        }
-        else{
+        } else {
             $this->line('Opcode cache: Nothing to clear');
         }
-
     }
 }
