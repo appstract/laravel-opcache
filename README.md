@@ -30,6 +30,7 @@ Then register the service provider:
 
 Make sure your APP_URL is set correctly.
 ## Usage
+Run one of the commands on your server.
 
 Clear OPcache:
 ``` bash
