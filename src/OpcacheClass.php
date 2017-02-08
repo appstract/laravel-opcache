@@ -24,7 +24,11 @@ class OpcacheClass
      */
     public function clear()
     {
-        return opcache_reset();
+        if(function_exists('opcache_reset')) {
+            return opcache_reset();
+        }
+
+        return false;
     }
 
     /**
@@ -34,9 +38,13 @@ class OpcacheClass
      */
     public function getConfig()
     {
-        $config = opcache_get_configuration();
+        if(function_exists('opcache_get_configuration')) {
+            $config = opcache_get_configuration();
 
-        return $config ?: false;
+            return $config ?: false;
+        }
+
+        return false;
     }
 
     /**
@@ -46,18 +54,26 @@ class OpcacheClass
      */
     public function getStatus()
     {
-        $status = opcache_get_status(false);
+        if(function_exists('opcache_get_status')) {
+            $status = opcache_get_status(false);
 
-        return $status ?: false;
+            return $status ?: false;
+        }
+
+        return false;
     }
 
     /**
      * Precompile app (WIP).
      *
-     * @return array
+     * @return bool | array
      */
     public function optimize()
     {
+        if(! function_exists('opcache_compile_file')) {
+            return false;
+        }
+
         $files = File::allFiles(base_path('app'));
         $files = array_merge($files, File::allFiles(base_path('bootstrap')));
         $files = array_merge($files, File::allFiles(base_path('routes')));
