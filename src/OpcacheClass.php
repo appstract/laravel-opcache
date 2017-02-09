@@ -24,7 +24,7 @@ class OpcacheClass
      */
     public function clear()
     {
-        if(function_exists('opcache_reset')) {
+        if (function_exists('opcache_reset')) {
             return opcache_reset();
         }
 
@@ -38,7 +38,7 @@ class OpcacheClass
      */
     public function getConfig()
     {
-        if(function_exists('opcache_get_configuration')) {
+        if (function_exists('opcache_get_configuration')) {
             $config = opcache_get_configuration();
 
             return $config ?: false;
@@ -54,7 +54,7 @@ class OpcacheClass
      */
     public function getStatus()
     {
-        if(function_exists('opcache_get_status')) {
+        if (function_exists('opcache_get_status')) {
             $status = opcache_get_status(false);
 
             return $status ?: false;
@@ -70,7 +70,7 @@ class OpcacheClass
      */
     public function optimize()
     {
-        if(! function_exists('opcache_compile_file')) {
+        if (! function_exists('opcache_compile_file')) {
             return false;
         }
 
