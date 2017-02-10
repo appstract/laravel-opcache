@@ -65,9 +65,12 @@ class Status extends Command
 
         return array_map(function ($key, $value) {
             $bytes = ['used_memory', 'free_memory', 'wasted_memory', 'buffer_size'];
+            $times = ['start_time', 'last_restart_time'];
 
             if (in_array($key, $bytes)) {
                 $value = number_format($value / 1048576, 2) . ' MB';
+            } elseif (in_array($key, $times)) {
+                $value = date('Y-m-d H:i:s', $value);
             }
 
             return [
