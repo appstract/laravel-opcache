@@ -68,7 +68,7 @@ class Status extends Command
             $times = ['start_time', 'last_restart_time'];
 
             if (in_array($key, $bytes)) {
-                $value = number_format($value / 1048576, 2) . ' MB';
+                $value = number_format($value / 1048576, 2).' MB';
             } elseif (in_array($key, $times)) {
                 $value = date('Y-m-d H:i:s', $value);
             }
