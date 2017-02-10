@@ -6,20 +6,20 @@
         "opcache",
         "laravel"
     ],
-    "homepage": "https://github.com/appstract/:package_name",
+    "homepage": "https://github.com/appstract/laravel-opcache",
     "license": "MIT",
     "authors": [
         {
             "name": "Olav van Schie",
-            "email": "appstr@ct.team",
+            "email": "hello@appstract.team",
             "homepage": "https://appstract.team",
             "role": "Developer"
         }
     ],
     "require": {
         "php": ">=5.6",
-        "illuminate/console": ">=5.3",
-        "illuminate/support": ">=5.3",
+        "illuminate/console": ">=5.1",
+        "illuminate/support": ">=5.1",
         "guzzlehttp/guzzle": "^5.3"
     },
     "require-dev": {
