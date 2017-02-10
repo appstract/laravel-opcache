@@ -64,6 +64,12 @@ class Status extends Command
         $input = (array) $input;
 
         return array_map(function ($key, $value) {
+            $bytes = ['used_memory', 'free_memory', 'wasted_memory', 'buffer_size'];
+
+            if (in_array($key, $bytes)) {
+                $value = number_format($value / 1048576, 2) . ' MB';
+            }
+
             return [
                 'key'       => $key,
                 'value'     => $value,
