@@ -74,22 +74,23 @@ class OpcacheClass
             return false;
         }
 
-        $files = File::allFiles(base_path('app'));
-        $files = array_merge($files, File::allFiles(base_path('bootstrap')));
-        $files = array_merge($files, File::allFiles(base_path('routes')));
+        // Get files in these paths
+        $files = File::allFiles([
+            base_path('app'),
+            base_path('bootstrap'),
+            base_path('storage/framework/views'),
+            base_path('routes'),
+            base_path('vendor/laravel/framework')
+        ]);
 
         $files = collect($files);
 
+        // filter on php extension
         $files = $files->filter(function ($value) {
-
-            //return  File::extension($value) == 'php' &&
-            //    strpos($value, '.blade.php') === false &&
-            //    strpos($value, '/tests/') === false &&
-            //    strpos($value, '/test/') === false;
-
-            return  File::extension($value) == 'php';
+            return File::extension($value) == 'php';
         });
 
+        // optimize files
         $optimized = 0;
 
         $files->each(function ($file) use (&$optimized) {
