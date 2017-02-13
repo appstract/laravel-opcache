@@ -80,7 +80,7 @@ class OpcacheClass
             base_path('bootstrap'),
             base_path('storage/framework/views'),
             base_path('routes'),
-            base_path('vendor/laravel/framework')
+            base_path('vendor/laravel/framework'),
         ]);
 
         $files = collect($files);

@@ -30,9 +30,9 @@ class Optimize extends Command
     {
         $this->line('Optimize started, this can take a while...');
 
-        $client     = new Client();
-        $response   = $client->get(config('app.url').'/opcache-api/optimize');
-        $response   = json_decode($response->getBody()->getContents());
+        $client = new Client();
+        $response = $client->get(config('app.url').'/opcache-api/optimize');
+        $response = json_decode($response->getBody()->getContents());
 
         if ($response->result) {
             $this->info(sprintf('%s of %s files optimized', $response->result->compiled_count, $response->result->total_files_count));
