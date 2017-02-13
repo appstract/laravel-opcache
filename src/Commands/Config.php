@@ -4,7 +4,6 @@ namespace Appstract\Opcache\Commands;
 
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
-use Appstract\Opcache\OpcacheFacade         as OPcache;
 
 class Config extends Command
 {
