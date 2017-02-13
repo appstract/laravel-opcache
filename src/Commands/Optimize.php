@@ -19,7 +19,7 @@ class Optimize extends Command
      *
      * @var string
      */
-    protected $description = 'Precompile your application code (experimental)';
+    protected $description = 'Pre-compile your application code (experimental)';
 
     /**
      * Execute the console command.
@@ -30,12 +30,12 @@ class Optimize extends Command
     {
         $this->line('Optimize started, this can take a while...');
 
-        $client = new Client();
-        $response = $client->get(config('app.url').'/opcache-api/optimize');
-        $response = json_decode($response->getBody()->getContents());
+        $client     = new Client();
+        $response   = $client->get(config('app.url').'/opcache-api/optimize');
+        $response   = json_decode($response->getBody()->getContents());
 
         if ($response->result) {
-            $this->info(sprintf('%s of %s files optimized', $response->result->total_files_count, $response->result->compiled_count));
+            $this->info(sprintf('%s of %s files optimized', $response->result->compiled_count, $response->result->total_files_count));
         } else {
             $this->error('No opcode information available');
         }
