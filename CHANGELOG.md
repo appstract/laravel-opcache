@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-opcache` will be documented in this file
 
+## 0.0.5
+- Improvements to optimize command
+- Remove bindings middleware
+- Some cleanup by @ctf0
+
 ## 0.0.4
 - Support Guzzle 6 in composer.json - thanks to @drbyte
 
