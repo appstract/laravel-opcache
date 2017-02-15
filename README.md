@@ -27,7 +27,8 @@ Then register the service provider:
 ];
 ```
 
-Make sure your APP_URL is set correctly.
+##### Make sure your APP_URL is set correctly.
+
 ## Usage
 Run one of the commands on your server.
 
@@ -45,6 +46,12 @@ Show OPcache status:
 ``` bash
 php artisan opcache:status
 ```
+
+Pre-compile your application code (experimental, test this first):
+``` bash
+php artisan opcache:optimize
+```
+
 Programmatic usage:
 
 ```php
