@@ -47,7 +47,7 @@ Show OPcache status:
 php artisan opcache:status
 ```
 
-Pre-compile your application code (experimental, test this first):
+Pre-compile your application code (experimental, test before you deploy):
 ``` bash
 php artisan opcache:optimize
 ```
