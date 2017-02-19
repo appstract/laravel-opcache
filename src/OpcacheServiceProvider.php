@@ -27,11 +27,6 @@ class OpcacheServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // bind facade
-        $this->app->bind('OPcache', function () {
-            return new OpcacheClass();
-        });
-
         // bind routes
         Route::group([
             'middleware'    => [\Appstract\Opcache\Http\Middleware\Request::class],
@@ -40,7 +35,5 @@ class OpcacheServiceProvider extends ServiceProvider
         ], function () {
             require __DIR__.'/Http/routes.php';
         });
-
-        //$this->mergeConfigFrom(__DIR__.'/../config/config.php', 'skeleton');
     }
 }
