@@ -2,8 +2,8 @@
 
 namespace Appstract\Opcache\Commands;
 
-use GuzzleHttp\Client;
 use Illuminate\Console\Command;
+use Appstract\LushHttp\LushFacade as Lush;
 
 class Optimize extends Command
 {
@@ -30,9 +30,8 @@ class Optimize extends Command
     {
         $this->line('Optimize started, this can take a while...');
 
-        $client = new Client();
-        $response = $client->get(config('app.url').'/opcache-api/optimize');
-        $response = json_decode($response->getBody()->getContents());
+        $client = Lush::get(config('app.url').'/opcache-api/optimize');
+        $response = $client->getResult();
 
         if ($response->result) {
             $this->info(sprintf('%s of %s files optimized', $response->result->compiled_count, $response->result->total_files_count));

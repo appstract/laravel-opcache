@@ -2,8 +2,8 @@
 
 namespace Appstract\Opcache\Commands;
 
-use GuzzleHttp\Client;
 use Illuminate\Console\Command;
+use Appstract\LushHttp\LushFacade as Lush;
 
 class Config extends Command
 {
@@ -28,9 +28,8 @@ class Config extends Command
      */
     public function handle()
     {
-        $client = new Client();
-        $response = $client->get(config('app.url').'/opcache-api/config');
-        $response = json_decode($response->getBody()->getContents());
+        $client = Lush::get(config('app.url').'/opcache-api/config');
+        $response = $client->getResult();
 
         if ($response->result !== false) {
             $this->line('Version info:');

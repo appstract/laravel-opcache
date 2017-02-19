@@ -1,10 +1,11 @@
 {
     "name": "appstract/laravel-opcache",
-    "description": "OPcache helper for Laravel",
+    "description": "OPcache helper for Laravel.",
     "keywords": [
         "appstract",
         "opcache",
-        "laravel"
+        "laravel",
+        "php"
     ],
     "homepage": "https://github.com/appstract/laravel-opcache",
     "license": "MIT",
@@ -20,7 +21,7 @@
         "php": ">=5.6",
         "illuminate/console": ">=5.1",
         "illuminate/support": ">=5.1",
-        "guzzlehttp/guzzle": "^5.3|^6.2"
+        "appstract/lush": "0.0.4"
     },
     "require-dev": {
         "orchestra/testbench": "^3.3",

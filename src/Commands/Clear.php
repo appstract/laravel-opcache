@@ -2,8 +2,8 @@
 
 namespace Appstract\Opcache\Commands;
 
-use GuzzleHttp\Client;
 use Illuminate\Console\Command;
+use Appstract\LushHttp\LushFacade as Lush;
 
 class Clear extends Command
 {
@@ -28,9 +28,8 @@ class Clear extends Command
      */
     public function handle()
     {
-        $client = new Client();
-        $response = $client->get(config('app.url').'/opcache-api/clear');
-        $response = json_decode($response->getBody()->getContents());
+        $client = Lush::get(config('app.url').'/opcache-api/clear');
+        $response = $client->getResult();
 
         if ($response->result !== false) {
             $this->info('Opcode cache cleared');
