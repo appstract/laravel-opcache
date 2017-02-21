@@ -28,8 +28,7 @@ class Clear extends Command
      */
     public function handle()
     {
-        $client = Lush::get(config('app.url').'/opcache-api/clear');
-        $response = $client->getResult();
+        $response = Lush::get(config('app.url').'/opcache-api/clear');
 
         if ($response->result !== false) {
             $this->info('Opcode cache cleared');
