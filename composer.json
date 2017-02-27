@@ -21,7 +21,7 @@
         "php": ">=5.6",
         "illuminate/console": ">=5.1",
         "illuminate/support": ">=5.1",
-        "appstract/lush-http": "0.0.6"
+        "appstract/lush-http": "^0.1"
     },
     "require-dev": {
         "orchestra/testbench": "^3.3",
