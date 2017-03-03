@@ -2,10 +2,10 @@
 
 namespace Appstract\Opcache\Http\Controllers;
 
+use Appstract\Opcache\OpcacheFacade as OPcache;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Appstract\Opcache\OpcacheFacade as OPcache;
 
 /**
  * Class OpcacheController.
