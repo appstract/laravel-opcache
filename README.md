@@ -30,7 +30,8 @@ Then register the service provider:
 ##### Make sure your APP_URL is set correctly.
 
 ## Usage
-Run one of the commands on your server.
+Login to your server/vm and run one of the commands.
+##### Requests are only excepted from the same IP as the server IP.
 
 Clear OPcache:
 ``` bash
@@ -69,7 +70,6 @@ Contributions are welcome, [thanks to y'all](https://github.com/appstract/larave
 ## About Appstract
 
 Appstract is a small team from The Netherlands. <3 Laravel, Vue and other awesome tools.
-
 
 ## Buy Us A Beer
 
