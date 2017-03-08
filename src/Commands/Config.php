@@ -53,6 +53,12 @@ class Config extends Command
         $input = (array) $input;
 
         return array_map(function ($key, $value) {
+            $bytes = ['opcache.memory_consumption'];
+
+            if (in_array($key, $bytes)) {
+                $value = number_format($value / 1048576, 2).' MB';
+            }
+
             return [
                 'key'       => $key,
                 'value'     => $value,
