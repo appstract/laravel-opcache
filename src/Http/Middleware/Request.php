@@ -23,7 +23,7 @@ class Request
     {
 
         // check if the source is trusted
-        if (! in_array($request->server('REMOTE_ADDR'), array($_SERVER['SERVER_ADDR'], '127.0.0.1', '::1'))) {
+        if (! in_array($request->server('REMOTE_ADDR'), [$_SERVER['SERVER_ADDR'], '127.0.0.1', '::1'])) {
             throw new AuthorizationException('This action is unauthorized.');
         }
 
