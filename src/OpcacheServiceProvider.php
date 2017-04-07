@@ -42,7 +42,7 @@ class OpcacheServiceProvider extends ServiceProvider
             'prefix'     => 'opcache-api',
             'namespace'  => 'Appstract\Opcache\Http\Controllers',
         ], function ($router) {
-            require __DIR__ . '/Http/routes.php';
+            require __DIR__.'/Http/routes.php';
         });
     }
 
@@ -54,7 +54,7 @@ class OpcacheServiceProvider extends ServiceProvider
             'prefix'     => 'opcache-api',
             'namespace'  => 'Appstract\Opcache\Http\Controllers',
         ], function ($router) {
-            require __DIR__ . '/Http/routes.php';
+            require __DIR__.'/Http/routes.php';
         });
     }
 
