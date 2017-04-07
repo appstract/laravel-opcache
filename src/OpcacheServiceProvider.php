@@ -27,7 +27,7 @@ class OpcacheServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (strpos(app()->version(), 'Lumen') === 0) {
+        if ($this->isLumen()) {
             $this->registerLumenRoutes();
         } else {
             $this->registerLaravelRoutes();
@@ -56,5 +56,10 @@ class OpcacheServiceProvider extends ServiceProvider
         ], function ($router) {
             require __DIR__ . '/Http/routes.php';
         });
+    }
+
+    protected function isLumen()
+    {
+        return str_contains($this->app->version(), 'Lumen');
     }
 }
