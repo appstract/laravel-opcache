@@ -1,6 +1,6 @@
 <?php
 
-Route::get('clear', 'OpcacheController@clear');
-Route::get('config', 'OpcacheController@config');
-Route::get('status', 'OpcacheController@status');
-Route::get('optimize', 'OpcacheController@optimize');
+$router->get('clear', 'OpcacheController@clear');
+$router->get('config', 'OpcacheController@config');
+$router->get('status', 'OpcacheController@status');
+$router->get('optimize', 'OpcacheController@optimize');
