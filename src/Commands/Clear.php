@@ -30,7 +30,7 @@ class Clear extends Command
     {
         $response = Lush::get(config('app.url').'/opcache-api/clear');
 
-        if ($response->result !== false) {
+        if ($response->result === true) {
             $this->info('Opcode cache cleared');
         } else {
             $this->line('Opcode cache: Nothing to clear');
