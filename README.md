@@ -12,16 +12,15 @@ This package contains some useful Artisan commands to work with PHP OPcache.
 
 ## Installation
 
-You can install the package via composer:
+You can install the package via Composer:
 
 ``` bash
 composer require appstract/laravel-opcache
 ```
 
-Then register the service provider:
+Then register the service provider to your `config/app.php` file:
 
 ```php
-// config/app.php
 'providers' => [
     ...
     Appstract\Opcache\OpcacheServiceProvider::class,
