@@ -23,7 +23,9 @@ class Request
     {
 
         // check if the source is trusted
-        if (! in_array($request->server('REMOTE_ADDR'), [$_SERVER['SERVER_ADDR'], '127.0.0.1', '::1'])) {
+        $requestIp = $request->server('HTTP_CF_CONNECTING_IP') ? $request->server('HTTP_CF_CONNECTING_IP') : $request->server('REMOTE_ADDR');
+        
+        if (! in_array($requestIp, [$_SERVER['SERVER_ADDR'], '127.0.0.1', '::1'])) {
             throw new AuthorizationException('This action is unauthorized.');
         }
 
