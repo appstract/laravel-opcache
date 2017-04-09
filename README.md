@@ -8,7 +8,7 @@
 
 This package contains some useful Artisan commands to work with PHP OPcache.
 
-#### If you want to learn more about OPcache and what it can do for your Laravel app, you can read [this article](https://medium.com/appstract/make-your-laravel-app-fly-with-php-opcache-9948db2a5f93#.bjrpj4h1c) on Medium.
+#### If you want to learn more about OPcache and what it can do for your Laravel app, you can read [the article](https://medium.com/appstract/make-your-laravel-app-fly-with-php-opcache-9948db2a5f93#.bjrpj4h1c) on Medium.
 
 ## Installation
 
@@ -27,7 +27,15 @@ Then register the service provider to your `config/app.php` file:
 ];
 ```
 
-##### Make sure your APP_URL is set correctly.
+For Lumen:
+```php
+// bootstrap/app.php
+$app->register(Appstract\Opcache\OpcacheServiceProvider::class);
+
+// config/app.php
+'url' => env('APP_URL'),
+```
+##### Make sure your APP_URL is set correctly in .env.
 
 ## Usage
 Login to your server/vm and run one of the commands.
