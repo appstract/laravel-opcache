@@ -2,7 +2,6 @@
 
 namespace Appstract\Opcache;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class OpcacheServiceProvider extends ServiceProvider
