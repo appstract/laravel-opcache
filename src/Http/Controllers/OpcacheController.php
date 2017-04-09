@@ -10,7 +10,6 @@ use Illuminate\Routing\Controller as BaseController;
  */
 class OpcacheController extends BaseController
 {
-
     /**
      * Clear the OPcache.
      *
