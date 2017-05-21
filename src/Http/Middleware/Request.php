@@ -21,14 +21,31 @@ class Request
      */
     public function handle($request, Closure $next)
     {
-
-        // check if the source is trusted
-        $requestIp = $request->server('HTTP_CF_CONNECTING_IP') ? $request->server('HTTP_CF_CONNECTING_IP') : $request->server('REMOTE_ADDR');
-
-        if (! in_array($requestIp, [$_SERVER['SERVER_ADDR'], '127.0.0.1', '::1'])) {
+        if (! in_array($this->getRequestIp($request), [$_SERVER['SERVER_ADDR'], '127.0.0.1', '::1'])) {
             throw new AuthorizationException('This action is unauthorized.');
         }
 
         return $next($request);
+    }
+
+    /**
+     * Get ip from different request headers
+     *
+     * @param $request
+     *
+     * @return mixed
+     */
+    protected function getRequestIp($request)
+    {
+        if ($request->server('HTTP_CF_CONNECTING_IP')) {
+            // cloudflare
+            return $request->server('HTTP_CF_CONNECTING_IP');
+        } else if ($request->server('X_FORWARDED_FOR')) {
+            // forwarded proxy
+            return $request->server('X_FORWARDED_FOR');
+        } else if ($request->server('REMOTE_ADDR')) {
+            // remote header
+            return $request->server('REMOTE_ADDR');
+        }
     }
 }
