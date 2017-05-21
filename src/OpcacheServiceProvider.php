@@ -26,6 +26,9 @@ class OpcacheServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // config
+        $this->mergeConfigFrom(__DIR__.'/../config/opcache.php', 'opcache');
+
         if (str_contains($this->app->version(), 'Lumen')) {
             $router = $this->app;
         } else {

@@ -30,7 +30,7 @@ class Optimize extends Command
     {
         $this->line('Optimize started, this can take a while...');
 
-        $response = Lush::get(config('app.url').'/opcache-api/optimize');
+        $response = Lush::get(config('opcache.url').'/opcache-api/optimize');
 
         if ($response->result) {
             $this->info(sprintf('%s of %s files optimized', $response->result->compiled_count, $response->result->total_files_count));

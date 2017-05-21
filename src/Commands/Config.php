@@ -28,7 +28,7 @@ class Config extends Command
      */
     public function handle()
     {
-        $response = Lush::get(config('app.url').'/opcache-api/config');
+        $response = Lush::get(config('opcache.url').'/opcache-api/config');
 
         if ($response->result !== false) {
             $this->line('Version info:');

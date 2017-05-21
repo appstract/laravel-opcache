@@ -28,7 +28,7 @@ class Status extends Command
      */
     public function handle()
     {
-        $response = Lush::get(config('app.url').'/opcache-api/status');
+        $response = Lush::get(config('opcache.url').'/opcache-api/status');
 
         if ($response->result !== false) {
             $this->line('General:');
