@@ -29,7 +29,7 @@ class Request
     }
 
     /**
-     * Get ip from different request headers
+     * Get ip from different request headers.
      *
      * @param $request
      *
@@ -40,10 +40,10 @@ class Request
         if ($request->server('HTTP_CF_CONNECTING_IP')) {
             // cloudflare
             return $request->server('HTTP_CF_CONNECTING_IP');
-        } else if ($request->server('X_FORWARDED_FOR')) {
+        } elseif ($request->server('X_FORWARDED_FOR')) {
             // forwarded proxy
             return $request->server('X_FORWARDED_FOR');
-        } else if ($request->server('REMOTE_ADDR')) {
+        } elseif ($request->server('REMOTE_ADDR')) {
             // remote header
             return $request->server('REMOTE_ADDR');
         }
