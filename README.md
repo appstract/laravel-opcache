@@ -35,7 +35,9 @@ $app->register(Appstract\Opcache\OpcacheServiceProvider::class);
 // config/app.php
 'url' => env('APP_URL'),
 ```
-##### Make sure your APP_URL is set correctly in .env.
+Make sure your APP_URL is set correctly in .env.
+If you want to set a different url to call the OPcache routes (if you use a loadbalancer for example),
+you can set OPCACHE_URL.
 
 ## Usage
 Login to your server/vm and run one of the commands.
