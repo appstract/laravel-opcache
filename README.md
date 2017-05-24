@@ -36,7 +36,7 @@ $app->register(Appstract\Opcache\OpcacheServiceProvider::class);
 'url' => env('APP_URL'),
 ```
 Make sure your APP_URL is set correctly in .env.
-If you want to set a different url to call the OPcache routes (if you use a loadbalancer for example),
+If you want to set a different url to call the OPcache routes (for use with a load balancer for example),
 you can set OPCACHE_URL.
 
 ## Usage
