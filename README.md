@@ -4,7 +4,7 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/appstract/laravel-opcache.svg?style=flat-square)](https://packagist.org/packages/appstract/laravel-opcache)
 
-![Opcache](header.png?raw=true)
+[<img src="header.png?raw=true">](https://medium.com/appstract/make-your-laravel-app-fly-with-php-opcache-9948db2a5f93)
 
 This package contains some useful Artisan commands to work with PHP OPcache.
 
