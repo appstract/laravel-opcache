@@ -8,7 +8,7 @@
 
 This package contains some useful Artisan commands to work with PHP OPcache.
 
-#### If you want to learn more about OPcache and what it can do for your Laravel app, you can read [the article](https://medium.com/appstract/make-your-laravel-app-fly-with-php-opcache-9948db2a5f93#.bjrpj4h1c) on Medium.
+#### If you want to learn more about OPcache and what it can do for your Laravel app, you can [read the article on Medium](https://medium.com/appstract/make-your-laravel-app-fly-with-php-opcache-9948db2a5f93#.bjrpj4h1c).
 
 ## Installation
 
