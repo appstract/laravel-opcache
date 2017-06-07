@@ -43,5 +43,12 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Appstract\\Opcache\\OpcacheServiceProvider"
+            ]
+        }
     }
 }
