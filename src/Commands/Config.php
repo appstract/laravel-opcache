@@ -30,7 +30,7 @@ class Config extends Command
     {
         $response = Lush::get(config('opcache.url').'/opcache-api/config');
 
-        if ($response->result !== false) {
+        if ($response->result) {
             $this->line('Version info:');
             $this->table(['key', 'value'], $this->parseTable($response->result->version));
 

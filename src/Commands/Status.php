@@ -30,7 +30,7 @@ class Status extends Command
     {
         $response = Lush::get(config('opcache.url').'/opcache-api/status');
 
-        if ($response->result !== false) {
+        if ($response->result) {
             $this->line('General:');
             $general = (array) $response->result;
             unset($general['memory_usage'], $general['interned_strings_usage'], $general['opcache_statistics']);
