@@ -2,9 +2,9 @@
 
 namespace Appstract\Opcache\Commands;
 
-use Appstract\LushHttp\Exception\LushRequestException;
 use Illuminate\Console\Command;
 use Appstract\LushHttp\LushFacade as Lush;
+use Appstract\LushHttp\Exception\LushRequestException;
 
 class Clear extends Command
 {
