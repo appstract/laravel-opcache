@@ -3,7 +3,7 @@
 namespace Appstract\Opcache\Http\Middleware;
 
 use Closure;
-use Exception;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Class Request.
@@ -17,12 +17,12 @@ class Request
      * @param Closure $next
      *
      * @return mixed
-     * @throws Exception
+     * @throws HttpException
      */
     public function handle($request, Closure $next)
     {
         if (! in_array($this->getRequestIp($request), [$_SERVER['SERVER_ADDR'], '127.0.0.1', '::1'])) {
-            throw new Exception('This action is unauthorized.');
+            throw new HttpException(403, 'This action is unauthorized.');
         }
 
         return $next($request);
