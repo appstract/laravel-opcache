@@ -4,6 +4,7 @@ namespace Appstract\Opcache\Commands;
 
 use Illuminate\Console\Command;
 use Appstract\LushHttp\LushFacade as Lush;
+use Appstract\LushHttp\Exception\LushRequestException;
 
 class Config extends Command
 {
@@ -28,16 +29,21 @@ class Config extends Command
      */
     public function handle()
     {
-        $response = Lush::get(config('opcache.url').'/opcache-api/config');
+        try {
+            $response = Lush::get(config('opcache.url').'/opcache-api/config');
 
-        if ($response->result) {
-            $this->line('Version info:');
-            $this->table(['key', 'value'], $this->parseTable($response->result->version));
+            if ($response->result) {
+                $this->line('Version info:');
+                $this->table(['key', 'value'], $this->parseTable($response->result->version));
 
-            $this->line(PHP_EOL.'Configuration info:');
-            $this->table(['option', 'value'], $this->parseTable($response->result->directives));
-        } else {
-            $this->error('No OPcache configuration found');
+                $this->line(PHP_EOL.'Configuration info:');
+                $this->table(['option', 'value'], $this->parseTable($response->result->directives));
+            } else {
+                $this->error('No OPcache configuration found');
+            }
+        } catch (LushRequestException $e) {
+            $this->error($e->getMessage());
+            $this->error('Url: '.$e->getRequest()->getUrl());
         }
     }
 

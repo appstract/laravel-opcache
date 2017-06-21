@@ -4,6 +4,7 @@ namespace Appstract\Opcache\Commands;
 
 use Illuminate\Console\Command;
 use Appstract\LushHttp\LushFacade as Lush;
+use Appstract\LushHttp\Exception\LushRequestException;
 
 class Status extends Command
 {
@@ -28,25 +29,40 @@ class Status extends Command
      */
     public function handle()
     {
-        $response = Lush::get(config('opcache.url').'/opcache-api/status');
+        try {
+            $response = Lush::get(config('opcache.url').'/opcache-api/status');
 
-        if ($response->result) {
-            $this->line('General:');
-            $general = (array) $response->result;
-            unset($general['memory_usage'], $general['interned_strings_usage'], $general['opcache_statistics']);
-            $this->table(['key', 'value'], $this->parseTable($general));
-
-            $this->line(PHP_EOL.'Memory usage:');
-            $this->table(['key', 'value'], $this->parseTable($response->result->memory_usage));
-
-            $this->line(PHP_EOL.'Interned strings usage:');
-            $this->table(['key', 'value'], $this->parseTable($response->result->interned_strings_usage));
-
-            $this->line(PHP_EOL.'Statistics:');
-            $this->table(['option', 'value'], $this->parseTable($response->result->opcache_statistics));
-        } else {
-            $this->error('No opcode cache status information available');
+            if ($response->result) {
+               $this->displayTables($response->result);
+            } else {
+                $this->error('No OPcache status information available');
+            }
+        } catch (LushRequestException $e) {
+            $this->error($e->getMessage());
+            $this->error('Url: '.$e->getRequest()->getUrl());
         }
+    }
+
+    /**
+     * Display info tables
+     *
+     * @param $data
+     */
+    protected function displayTables($data)
+    {
+        $this->line('General:');
+        $general = (array) $data;
+        unset($general['memory_usage'], $general['interned_strings_usage'], $general['opcache_statistics']);
+        $this->table(['key', 'value'], $this->parseTable($general));
+
+        $this->line(PHP_EOL.'Memory usage:');
+        $this->table(['key', 'value'], $this->parseTable($data->memory_usage));
+
+        $this->line(PHP_EOL.'Interned strings usage:');
+        $this->table(['key', 'value'], $this->parseTable($data->interned_strings_usage));
+
+        $this->line(PHP_EOL.'Statistics:');
+        $this->table(['option', 'value'], $this->parseTable($data->opcache_statistics));
     }
 
     /**
