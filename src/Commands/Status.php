@@ -33,7 +33,7 @@ class Status extends Command
             $response = Lush::get(config('opcache.url').'/opcache-api/status');
 
             if ($response->result) {
-               $this->displayTables($response->result);
+                $this->displayTables($response->result);
             } else {
                 $this->error('No OPcache status information available');
             }
@@ -44,7 +44,7 @@ class Status extends Command
     }
 
     /**
-     * Display info tables
+     * Display info tables.
      *
      * @param $data
      */
