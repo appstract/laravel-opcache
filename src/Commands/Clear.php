@@ -3,11 +3,13 @@
 namespace Appstract\Opcache\Commands;
 
 use Illuminate\Console\Command;
-use Appstract\LushHttp\LushFacade as Lush;
+use Appstract\Opcache\CreatesRequest;
 use Appstract\LushHttp\Exception\LushRequestException;
 
 class Clear extends Command
 {
+    use CreatesRequest;
+
     /**
      * The console command name.
      *
@@ -30,7 +32,7 @@ class Clear extends Command
     public function handle()
     {
         try {
-            $response = Lush::get(config('opcache.url').'/opcache-api/clear');
+            $response = $this->sendRequest('clear');
 
             if ($response->result === true) {
                 $this->info('Opcode cache cleared');

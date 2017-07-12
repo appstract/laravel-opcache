@@ -21,11 +21,24 @@ class Request
      */
     public function handle($request, Closure $next)
     {
-        if (! in_array($this->getRequestIp($request), [$_SERVER['SERVER_ADDR'], '127.0.0.1', '::1'])) {
+        if (! $this->isAllowed($request)) {
             throw new HttpException(403, 'This action is unauthorized.');
         }
 
         return $next($request);
+    }
+
+    /**
+     * Check if the request is allowed
+     *
+     * @param $request
+     *
+     * @return bool
+     */
+    protected function isAllowed($request)
+    {
+        return decrypt($request->get('key')) == 'opcache' ||
+            in_array($this->getRequestIp($request), [$this->getServerIp(), '127.0.0.1', '::1']);
     }
 
     /**
@@ -47,5 +60,16 @@ class Request
             // remote header
             return $request->server('REMOTE_ADDR');
         }
+    }
+
+    /**
+     * Get the server ip
+     *
+     * @return string
+     */
+    protected function getServerIp()
+    {
+        return isset($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] :
+            isset($_SERVER['LOCAL_ADDR']) ? $_SERVER['LOCAL_ADDR'] : '127.0.0.1';
     }
 }

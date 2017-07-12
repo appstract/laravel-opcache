@@ -3,11 +3,13 @@
 namespace Appstract\Opcache\Commands;
 
 use Illuminate\Console\Command;
-use Appstract\LushHttp\LushFacade as Lush;
+use Appstract\Opcache\CreatesRequest;
 use Appstract\LushHttp\Exception\LushRequestException;
 
 class Optimize extends Command
 {
+    use CreatesRequest;
+
     /**
      * The console command name.
      *
@@ -20,7 +22,7 @@ class Optimize extends Command
      *
      * @var string
      */
-    protected $description = 'Pre-compile your application code (experimental)';
+    protected $description = 'Pre-compile your application code';
 
     /**
      * Execute the console command.
@@ -32,7 +34,7 @@ class Optimize extends Command
         try {
             $this->line('Optimize started, this can take a while...');
 
-            $response = Lush::get(config('opcache.url').'/opcache-api/optimize');
+            $response = $this->sendRequest('optimize');
 
             if ($response->result) {
                 $this->info(sprintf('%s of %s files optimized', $response->result->compiled_count, $response->result->total_files_count));

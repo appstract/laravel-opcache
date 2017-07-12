@@ -3,11 +3,13 @@
 namespace Appstract\Opcache\Commands;
 
 use Illuminate\Console\Command;
-use Appstract\LushHttp\LushFacade as Lush;
+use Appstract\Opcache\CreatesRequest;
 use Appstract\LushHttp\Exception\LushRequestException;
 
 class Status extends Command
 {
+    use CreatesRequest;
+
     /**
      * The console command name.
      *
@@ -30,7 +32,7 @@ class Status extends Command
     public function handle()
     {
         try {
-            $response = Lush::get(config('opcache.url').'/opcache-api/status');
+            $response = $this->sendRequest('status');
 
             if ($response->result) {
                 $this->displayTables($response->result);
