@@ -64,7 +64,7 @@ class OpcacheClass
     }
 
     /**
-     * Precompile app (WIP).
+     * Precompile app.
      *
      * @return bool | array
      */
@@ -78,8 +78,12 @@ class OpcacheClass
         $files = File::allFiles([
             base_path('app'),
             base_path('bootstrap'),
-            base_path('storage/framework/views'),
+            base_path('public'),
+            base_path('resources/lang'),
             base_path('routes'),
+            base_path('storage/framework/views'),
+            base_path('vendor/appstract'),
+            base_path('vendor/composer'),
             base_path('vendor/laravel/framework'),
         ]);
 
@@ -90,7 +94,7 @@ class OpcacheClass
             return File::extension($value) == 'php';
         });
 
-        // optimize files
+        // optimized files
         $optimized = 0;
 
         $files->each(function ($file) use (&$optimized) {
