@@ -29,7 +29,7 @@ class Request
     }
 
     /**
-     * Check if the request is allowed
+     * Check if the request is allowed.
      *
      * @param $request
      *
@@ -63,7 +63,7 @@ class Request
     }
 
     /**
-     * Get the server ip
+     * Get the server ip.
      *
      * @return string
      */

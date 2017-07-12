@@ -15,5 +15,4 @@ trait CreatesRequest
     {
         return Lush::get(config('opcache.url').'/opcache-api/'.$url, ['key' => encrypt('opcache')]);
     }
-
 }
