@@ -3,6 +3,7 @@
 namespace Appstract\Opcache\Http\Middleware;
 
 use Closure;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
@@ -37,8 +38,13 @@ class Request
      */
     protected function isAllowed($request)
     {
-        return decrypt($request->get('key')) == 'opcache' ||
-            in_array($this->getRequestIp($request), [$this->getServerIp(), '127.0.0.1', '::1']);
+        try {
+            $decrypted = decrypt($request->get('key'));
+        } catch (DecryptException $e) {
+            $decrypted = '';
+        }
+
+        return $decrypted == 'opcache' || in_array($this->getRequestIp($request), [$this->getServerIp(), '127.0.0.1', '::1']);
     }
 
     /**
