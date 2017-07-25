@@ -2,6 +2,7 @@
 
 namespace Appstract\Opcache\Http\Middleware;
 
+use Crypt;
 use Closure;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -39,7 +40,7 @@ class Request
     protected function isAllowed($request)
     {
         try {
-            $decrypted = decrypt($request->get('key'));
+            $decrypted = Crypt::decrypt($request->get('key'));
         } catch (DecryptException $e) {
             $decrypted = '';
         }
@@ -75,7 +76,12 @@ class Request
      */
     protected function getServerIp()
     {
-        return isset($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] :
-            isset($_SERVER['LOCAL_ADDR']) ? $_SERVER['LOCAL_ADDR'] : '127.0.0.1';
+        if (isset($_SERVER['SERVER_ADDR'])) {
+            return $_SERVER['SERVER_ADDR'];
+        } else if($_SERVER['LOCAL_ADDR']) {
+            return $_SERVER['LOCAL_ADDR'];
+        }
+
+        return '127.0.0.1';
     }
 }
