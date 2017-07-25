@@ -78,7 +78,7 @@ class Request
     {
         if (isset($_SERVER['SERVER_ADDR'])) {
             return $_SERVER['SERVER_ADDR'];
-        } else if($_SERVER['LOCAL_ADDR']) {
+        } elseif ($_SERVER['LOCAL_ADDR']) {
             return $_SERVER['LOCAL_ADDR'];
         }
 
