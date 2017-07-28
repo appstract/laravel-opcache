@@ -2,8 +2,8 @@
 
 namespace Appstract\Opcache\Http\Middleware;
 
-use Crypt;
 use Closure;
+use Illuminate\Support\Facades\Crypt as Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
