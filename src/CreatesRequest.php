@@ -2,8 +2,8 @@
 
 namespace Appstract\Opcache;
 
-use Crypt;
 use Appstract\LushHttp\LushFacade as Lush;
+use Illuminate\Support\Facades\Crypt as Crypt;
 
 trait CreatesRequest
 {
