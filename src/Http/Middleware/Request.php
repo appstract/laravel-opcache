@@ -60,10 +60,14 @@ class Request
         if ($request->server('HTTP_CF_CONNECTING_IP')) {
             // cloudflare
             return $request->server('HTTP_CF_CONNECTING_IP');
-        } elseif ($request->server('X_FORWARDED_FOR')) {
+        }
+
+        if ($request->server('X_FORWARDED_FOR')) {
             // forwarded proxy
             return $request->server('X_FORWARDED_FOR');
-        } elseif ($request->server('REMOTE_ADDR')) {
+        }
+
+        if ($request->server('REMOTE_ADDR')) {
             // remote header
             return $request->server('REMOTE_ADDR');
         }
@@ -78,7 +82,9 @@ class Request
     {
         if (isset($_SERVER['SERVER_ADDR'])) {
             return $_SERVER['SERVER_ADDR'];
-        } elseif ($_SERVER['LOCAL_ADDR']) {
+        }
+
+        if (isset($_SERVER['LOCAL_ADDR'])) {
             return $_SERVER['LOCAL_ADDR'];
         }
 
