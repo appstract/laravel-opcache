@@ -84,7 +84,7 @@ class Request
             return $_SERVER['SERVER_ADDR'];
         }
 
-        if ($_SERVER['LOCAL_ADDR']) {
+        if (isset($_SERVER['LOCAL_ADDR'])) {
             return $_SERVER['LOCAL_ADDR'];
         }
 
