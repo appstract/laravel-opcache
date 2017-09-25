@@ -29,7 +29,7 @@ class OpcacheServiceProvider extends ServiceProvider
         // config
         $this->mergeConfigFrom(__DIR__.'/../config/opcache.php', 'opcache');
 
-        if (str_contains($this->app->version(), 'Lumen')) {
+        if (str_contains($this->app->version(), 'Lumen') && ! property_exists($this->app, 'router')) {
             $router = $this->app;
         } else {
             $router = $this->app->router;
