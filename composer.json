@@ -22,6 +22,7 @@
         "illuminate/console": ">=5.1",
         "illuminate/support": ">=5.1",
         "illuminate/routing": ">=5.1",
+        "illuminate/filesystem": ">=5.1",
         "appstract/lush-http": "^0.2"
     },
     "require-dev": {

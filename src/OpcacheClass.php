@@ -2,7 +2,7 @@
 
 namespace Appstract\Opcache;
 
-use File;
+use Illuminate\Support\Facades\File;
 
 /**
  * Class OpcacheClass.
