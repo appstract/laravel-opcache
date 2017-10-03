@@ -18,7 +18,7 @@ You can install the package via Composer:
 composer require appstract/laravel-opcache
 ```
 
-Then register the service provider to your `config/app.php` file:
+Then register the service provider to your `config/app.php` file (this is only for Laravel < 5.5):
 
 ```php
 'providers' => [
