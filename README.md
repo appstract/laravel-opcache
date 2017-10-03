@@ -31,9 +31,22 @@ For Lumen:
 ```php
 // bootstrap/app.php
 $app->register(Appstract\Opcache\OpcacheServiceProvider::class);
+$app->configure('opcache');
 
 // config/app.php
 'url' => env('APP_URL'),
+
+// config/opcache.php
+'directories' => [
+    base_path('app'),
+    base_path('bootstrap'),
+    base_path('public'),
+    base_path('routes'),
+    base_path('vendor/appstract'),
+    base_path('vendor/composer'),
+    base_path('vendor/laravel/lumen-framework'),
+    base_path('vendor/illuminate'),
+]
 ```
 Make sure your APP_URL is set correctly in .env.
 If you want to set a different url to call the OPcache routes (for use with a load balancer for example),
