@@ -24,6 +24,7 @@ Then register the service provider to your `config/app.php` file (this is only f
 'providers' => [
     ...
     Appstract\Opcache\OpcacheServiceProvider::class,
+    ...
 ];
 ```
 
