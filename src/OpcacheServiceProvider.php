@@ -18,6 +18,10 @@ class OpcacheServiceProvider extends ServiceProvider
                 Commands\Status::class,
                 Commands\Optimize::class,
             ]);
+
+            $this->publishes([
+                __DIR__.'/../config/opcache.php' => config_path('opcache.php'),
+            ], 'config');
         }
     }
 
