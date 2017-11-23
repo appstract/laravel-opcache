@@ -88,8 +88,10 @@ class OpcacheClass
         $optimized = 0;
 
         $files->each(function ($file) use (&$optimized) {
-            if (@opcache_compile_file($file)) {
-                $optimized++;
+            if (! opcache_is_script_cached($file)) {
+                if (@opcache_compile_file($file)) {
+                    $optimized++;
+                }
             }
         });
 
