@@ -10,6 +10,11 @@ This package contains some useful Artisan commands to work with PHP OPcache.
 
 #### If you want to learn more about OPcache and what it can do for your Laravel app, you can [read the article on Medium](https://medium.com/appstract/make-your-laravel-app-fly-with-php-opcache-9948db2a5f93#.bjrpj4h1c).
 
+## Requirements
+This package requires Laravel 5.4 or newer.
+For older Laravel versions (5.1 or newer),
+you can use version 1.3.0
+
 ## Installation
 
 You can install the package via Composer:
