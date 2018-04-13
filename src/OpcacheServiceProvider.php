@@ -37,7 +37,7 @@ class OpcacheServiceProvider extends ServiceProvider
 
         $version = $this->app->version();
         if (str_contains($version, 'Lumen')) {
-            if ($this->isLumenWithRouteVersion($version)) {
+            if ($this->isLumenWithRouterVersion($version)) {
                 $router = $this->app->router;
             } else {
                 $router = $this->app;
@@ -56,7 +56,7 @@ class OpcacheServiceProvider extends ServiceProvider
         });
     }
 
-    private function isLumenWithRouteVersion($version)
+    private function isLumenWithRouterVersion($version)
     {
         if (preg_match('/.*\((\d+\.\d+\.\d+)\).*/', $version, $m)) {
             return version_compare('5.5', $m[1]) <= 0;
