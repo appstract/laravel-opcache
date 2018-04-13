@@ -54,7 +54,7 @@ class OpcacheServiceProvider extends ServiceProvider
     private function isLumenWithRouterVersion()
     {
         $version = $this->app->version();
-        if (!str_contains($version, 'Lumen')) {
+        if (! str_contains($version, 'Lumen')) {
             return false;
         }
 
