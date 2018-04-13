@@ -58,7 +58,7 @@ class OpcacheServiceProvider extends ServiceProvider
 
     private function isLumenWithRouteVersion($version)
     {
-        if (preg_match('/.*\((\d+\.\d+\.\d+)\).*/', $version, $m )) {
+        if (preg_match('/.*\((\d+\.\d+\.\d+)\).*/', $version, $m)) {
             return version_compare('5.5', $m[1]) <= 0;
         }
 
