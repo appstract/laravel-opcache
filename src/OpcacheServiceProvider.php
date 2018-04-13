@@ -35,8 +35,13 @@ class OpcacheServiceProvider extends ServiceProvider
         // config
         $this->mergeConfigFrom(__DIR__.'/../config/opcache.php', 'opcache');
 
-        if (str_contains($this->app->version(), 'Lumen') && ! property_exists($this->app, 'router')) {
-            $router = $this->app;
+        $version = $this->app->version();
+        if (str_contains($version, 'Lumen')) {
+            if ($this->isLumenWithRouteVersion($version)) {
+                $router = $this->app->router;
+            } else {
+                $router = $this->app;
+            }
         } else {
             $router = $this->app->router;
         }
@@ -49,5 +54,14 @@ class OpcacheServiceProvider extends ServiceProvider
         ], function ($router) {
             require __DIR__.'/Http/routes.php';
         });
+    }
+
+    private function isLumenWithRouteVersion($version)
+    {
+        if (preg_match('/.*\((\d+\.\d+\.\d+)\).*/', $version, $m )) {
+            return version_compare('5.5', $m[1]) <= 0;
+        }
+
+        return false;
     }
 }
