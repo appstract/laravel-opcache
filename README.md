@@ -19,6 +19,12 @@ You can install the package via Composer:
 composer require appstract/laravel-opcache
 ```
 
+You can publish the config file with:
+
+```bash
+php artisan vendor:publish --provider="Appstract\Opcache\OpcacheServiceProvider" --tag="config"
+```
+
 For Lumen:
 ```php
 // bootstrap/app.php
