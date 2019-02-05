@@ -87,8 +87,11 @@ class OpcacheClass
         // optimized files
         $optimized = 0;
 
-        $files->each(function ($file) use (&$optimized) {
-            if (! opcache_is_script_cached($file)) {
+        // duplicate of vendor/Composer/ClassLoader.php
+        $originalClassLoaderPath = realpath(base_path('vendor/composer/composer/src/Composer/Autoload/ClassLoader.php'));
+
+        $files->each(function ($file) use (&$optimized, $originalClassLoaderPath) {
+            if (! opcache_is_script_cached($file) && $file->getRealPath() !== $originalClassLoaderPath) {
                 if (@opcache_compile_file($file)) {
                     $optimized++;
                 }
