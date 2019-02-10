@@ -88,7 +88,8 @@ class OpcacheClass
         $optimized = 0;
 
         // duplicate of vendor/Composer/ClassLoader.php
-        $originalClassLoaderPath = realpath(base_path('vendor/composer/composer/src/Composer/Autoload/ClassLoader.php'));
+        $vendorDir = dirname(dirname(dirname(__DIR__)));
+        $originalClassLoaderPath = realpath("$vendorDir/composer/composer/src/Composer/Autoload/ClassLoader.php");
 
         $files->each(function ($file) use (&$optimized, $originalClassLoaderPath) {
             if (! opcache_is_script_cached($file) && $file->getRealPath() !== $originalClassLoaderPath) {
