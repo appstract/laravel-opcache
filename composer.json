@@ -19,11 +19,12 @@
     ],
     "require": {
         "php": ">=5.6",
+        "appstract/lush-http": "^0.5",
         "illuminate/console": ">=5.5",
-        "illuminate/support": ">=5.5",
-        "illuminate/routing": ">=5.5",
         "illuminate/filesystem": ">=5.5",
-        "appstract/lush-http": "^0.5"
+        "illuminate/routing": ">=5.5",
+        "illuminate/support": ">=5.5",
+        "illuminate/view": ">=5.5"
     },
     "require-dev": {
         "orchestra/testbench": "^3.3",

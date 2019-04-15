@@ -19,10 +19,19 @@ class OpcacheServiceProvider extends ServiceProvider
                 Commands\Optimize::class,
             ]);
 
-            if (! str_contains($this->app->version(), 'Lumen')) {
+            if (! Helpers::isLumen()) {
                 $this->publishes([
                     __DIR__.'/../config/opcache.php' => config_path('opcache.php'),
                 ], 'config');
+
+                $this->publishes([
+                    __DIR__.'/../public' => public_path('packages/appstract/opcache'),
+                ], 'assets');
+            }
+        } else {
+            if (! Helpers::isLumen()) {
+                $this->loadTranslationsFrom(__DIR__ . '/../lang', 'opcache');
+                $this->loadViewsFrom(__DIR__ . '/../views', 'opcache');
             }
         }
     }
@@ -43,8 +52,6 @@ class OpcacheServiceProvider extends ServiceProvider
 
         // bind routes
         $router->group([
-            'middleware'    => [\Appstract\Opcache\Http\Middleware\Request::class],
-            'prefix'        => 'opcache-api',
             'namespace'     => 'Appstract\Opcache\Http\Controllers',
         ], function ($router) {
             require __DIR__.'/Http/routes.php';
@@ -54,7 +61,7 @@ class OpcacheServiceProvider extends ServiceProvider
     private function isLumenWithoutRouterVersion()
     {
         $version = $this->app->version();
-        if (! str_contains($version, 'Lumen')) {
+        if (! Helpers::isLumen()) {
             return false;
         }
 

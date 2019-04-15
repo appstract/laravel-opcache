@@ -52,10 +52,10 @@ class OpcacheClass
      *
      * @return mixed
      */
-    public function getStatus()
+    public function getStatus($getScripts = false)
     {
         if (function_exists('opcache_get_status')) {
-            $status = opcache_get_status(false);
+            $status = opcache_get_status($getScripts);
 
             return $status ?: false;
         }
