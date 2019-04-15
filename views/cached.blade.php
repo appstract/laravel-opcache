@@ -89,7 +89,7 @@
                             <form action="{{ route('opcache-api.invalidate') }}" method="post">
                                 <input type="hidden" name="key" value="{{ \Crypt::encrypt('opcache') }}">
                                 <input type="hidden" name="full_path" value="{{ $script['prefix'] . $script['full_path'] }}">
-                                <button type="submit" name="submit" value="Invalidate" class="cnfbtn cnfbtn--fn js-confirm inv" title="{{ trans('opcache::messages.script.invalidate') }}">{{ trans('opcache::messages.script.invalidate') }}</button>
+                                <button type="submit" name="submit" value="Invalidate" class="cnfbtn cnfbtn--fn js-confirm inv" title="{{ trans('opcache::messages.scripts.invalidate') }}">{{ trans('opcache::messages.scripts.invalidate') }}</button>
                             </form>
                         </td>
                     </tr>
