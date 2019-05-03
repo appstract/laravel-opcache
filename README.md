@@ -31,7 +31,7 @@ For Lumen:
 $app->register(Appstract\Opcache\OpcacheServiceProvider::class);
 $app->configure('opcache');
 
-// config/app.php
+// config/app.php (Only if you already have a custom app.php file)
 'url' => env('APP_URL'),
 
 // config/opcache.php
