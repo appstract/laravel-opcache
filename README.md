@@ -35,7 +35,7 @@ $app->configure('opcache');
 'url' => env('APP_URL'),
 
 // config/opcache.php
-'url' => env('OPCACHE_URL', config('app.url')),
+'url' => env('OPCACHE_URL', env('APP_URL')),
 'verify_ssl' => true,
 'headers' => [],
 'directories' => [
