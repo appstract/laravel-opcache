@@ -25,7 +25,7 @@ You can publish the config file with:
 php artisan vendor:publish --provider="Appstract\Opcache\OpcacheServiceProvider" --tag="config"
 ```
 
-For Lumen:
+### For Lumen:
 ```php
 // bootstrap/app.php
 $app->register(Appstract\Opcache\OpcacheServiceProvider::class);
@@ -52,6 +52,19 @@ $app->configure('opcache');
 Make sure your APP_URL is set correctly in .env.
 If you want to set a different url to call the OPcache routes (for use with a load balancer for example),
 you can set OPCACHE_URL.
+
+You will also need an encryption key set in your `.env` file. Since Lumen does not have a artisan generate command, you can create a tempoary route to generate one for you.
+
+```php
+$router->get('/key', function() {
+    return 'base64:'.base64_encode(random_bytes(32));  
+});
+```
+
+Put the results in your .env file:
+```
+APP_KEY=
+```
 
 ## Usage
 Login to your server/vm and run one of the commands.
