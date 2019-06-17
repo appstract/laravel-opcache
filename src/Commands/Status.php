@@ -91,7 +91,7 @@ class Status extends Command
             } elseif (in_array($key, $times)) {
                 $value = date('Y-m-d H:i:s', $value);
             } elseif (is_bool($value)) {
-                $value = $value ? 'True' : 'False';
+                $value = $value ? 'true' : 'false';
             }
 
             return [
