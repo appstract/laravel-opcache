@@ -20,7 +20,7 @@ You can install the package via Composer:
 composer require appstract/laravel-opcache
 ```
 
-You can publish the config file with:
+If you need to change config values, you can publish the config file with:
 
 ```bash
 php artisan vendor:publish --provider="Appstract\Opcache\OpcacheServiceProvider" --tag="config"

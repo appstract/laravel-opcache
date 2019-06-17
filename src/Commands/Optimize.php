@@ -27,19 +27,18 @@ class Optimize extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
      */
     public function handle()
     {
         try {
-            $this->line('Optimize started, this can take a while...');
+            $this->line('Compiling scripts...');
 
             $response = $this->sendRequest('optimize');
 
             if ($response->result) {
-                $this->info(sprintf('%s of %s files optimized', $response->result->compiled_count, $response->result->total_files_count));
+                $this->info(sprintf('%s of %s files compiled', $response->result->compiled_count, $response->result->total_files_count));
             } else {
-                $this->error('No OPcache information available');
+                $this->error('OPcache not configured');
             }
         } catch (LushRequestException $e) {
             $this->error($e->getMessage());

@@ -22,7 +22,7 @@ class Status extends Command
      *
      * @var string
      */
-    protected $description = 'Show state information, memory usage, etc..';
+    protected $description = 'Show OPcache status';
 
     /**
      * Execute the console command.
@@ -35,9 +35,10 @@ class Status extends Command
             $response = $this->sendRequest('status');
 
             if ($response->result) {
+//                dd($response->result);
                 $this->displayTables($response->result);
             } else {
-                $this->error('No OPcache status information available');
+                $this->error('OPcache not configured');
             }
         } catch (LushRequestException $e) {
             $this->error($e->getMessage());
@@ -52,19 +53,22 @@ class Status extends Command
      */
     protected function displayTables($data)
     {
-        $this->line('General:');
         $general = (array) $data;
         unset($general['memory_usage'], $general['interned_strings_usage'], $general['opcache_statistics']);
-        $this->table(['key', 'value'], $this->parseTable($general));
+        $this->table([], $this->parseTable($general));
 
         $this->line(PHP_EOL.'Memory usage:');
-        $this->table(['key', 'value'], $this->parseTable($data->memory_usage));
+        $this->table([], $this->parseTable($data->memory_usage));
 
-        $this->line(PHP_EOL.'Interned strings usage:');
-        $this->table(['key', 'value'], $this->parseTable($data->interned_strings_usage));
+        if (isset($data->opcache_statistics)) {
+            $this->line(PHP_EOL.'Statistics:');
+            $this->table([], $this->parseTable($data->opcache_statistics));
+        }
 
-        $this->line(PHP_EOL.'Statistics:');
-        $this->table(['option', 'value'], $this->parseTable($data->opcache_statistics));
+        if (isset($data->interned_strings_usage)) {
+            $this->line(PHP_EOL.'Interned strings usage:');
+            $this->table([], $this->parseTable($data->interned_strings_usage));
+        }
     }
 
     /**
@@ -77,20 +81,22 @@ class Status extends Command
     protected function parseTable($input)
     {
         $input = (array) $input;
+        $bytes = ['used_memory', 'free_memory', 'wasted_memory', 'buffer_size'];
+        $times = ['start_time', 'last_restart_time'];
 
-        return array_map(function ($key, $value) {
-            $bytes = ['used_memory', 'free_memory', 'wasted_memory', 'buffer_size'];
-            $times = ['start_time', 'last_restart_time'];
+        return array_map(function ($key, $value) use ($bytes, $times){
 
             if (in_array($key, $bytes)) {
                 $value = number_format($value / 1048576, 2).' MB';
             } elseif (in_array($key, $times)) {
                 $value = date('Y-m-d H:i:s', $value);
+            } elseif (is_bool($value)) {
+                $value = $value ? 'True' : 'False';
             }
 
             return [
-                'key'       => $key,
-                'value'     => $value,
+                'key' => $key,
+                'value' => $value,
             ];
         }, array_keys($input), $input);
     }

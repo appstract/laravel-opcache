@@ -22,7 +22,7 @@ class Config extends Command
      *
      * @var string
      */
-    protected $description = 'Show your opcode cache configuration';
+    protected $description = 'Show your OPcache configuration';
 
     /**
      * Execute the console command.
@@ -41,7 +41,7 @@ class Config extends Command
                 $this->line(PHP_EOL.'Configuration info:');
                 $this->table(['option', 'value'], $this->parseTable($response->result->directives));
             } else {
-                $this->error('No OPcache configuration found');
+                $this->error('OPcache not configured');
             }
         } catch (LushRequestException $e) {
             $this->error($e->getMessage());
