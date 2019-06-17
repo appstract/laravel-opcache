@@ -12,8 +12,6 @@ class OpcacheClass
 
     /**
      * Clear OPcache.
-     *
-     * @return bool
      */
     public function clear()
     {
@@ -24,8 +22,6 @@ class OpcacheClass
 
     /**
      * Get configuration values.
-     *
-     * @return mixed
      */
     public function getConfig()
     {
@@ -36,8 +32,6 @@ class OpcacheClass
 
     /**
      * Get status info.
-     *
-     * @return mixed
      */
     public function getStatus()
     {
@@ -48,29 +42,32 @@ class OpcacheClass
 
     /**
      * Pre-compile php scripts.
-     *
-     * @return bool | array
      */
     public function optimize()
     {
         if (function_exists('opcache_compile_file')) {
-            $optimized = 0;
+            $compiled = 0;
 
             // Get files in these paths
             $files = collect(Finder::create()->in(config('opcache.directories'))
                 ->name('*.php')
+                ->exclude(['tests', 'stubs', 'sebastian/resource-operations'])
                 ->files());
 
             // optimized files
-            $files->each(function ($file) use (&$optimized) {
-                if (@opcache_compile_file($file)) {
-                    $optimized++;
-                }
+            $files->each(function ($file) use (&$compiled) {
+                try {
+                    if (!opcache_is_script_cached($file)) {
+                        opcache_compile_file($file);
+                    }
+
+                    $compiled++;
+                } catch (\Exception $e) {}
             });
 
             return [
                 'total_files_count' => $files->count(),
-                'compiled_count' => $optimized,
+                'compiled_count' => $compiled,
             ];
         }
     }
