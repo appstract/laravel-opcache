@@ -19,11 +19,9 @@ class OpcacheServiceProvider extends ServiceProvider
                 Commands\Optimize::class,
             ]);
 
-            if (! str_contains($this->app->version(), 'Lumen')) {
-                $this->publishes([
-                    __DIR__.'/../config/opcache.php' => config_path('opcache.php'),
-                ], 'config');
-            }
+            $this->publishes([
+                __DIR__.'/../config/opcache.php' => config_path('opcache.php'),
+            ], 'config');
         }
     }
 
