@@ -2,7 +2,7 @@
 
 namespace Appstract\Opcache;
 
-use Illuminate\Support\Facades\File;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Class OpcacheClass.
@@ -75,23 +75,18 @@ class OpcacheClass
         }
 
         // Get files in these paths
-        $files = File::allFiles(config('opcache.directories'));
+        $files = Finder::create()->in(config('opcache.directories'))
+            ->name('*.php')
+            ->files();
 
         $files = collect($files);
-
-        // filter on php extension
-        $files = $files->filter(function ($value) {
-            return File::extension($value) == 'php';
-        });
 
         // optimized files
         $optimized = 0;
 
         $files->each(function ($file) use (&$optimized) {
-            if (! opcache_is_script_cached($file)) {
-                if (@opcache_compile_file($file)) {
-                    $optimized++;
-                }
+            if (!opcache_is_script_cached($file) && @opcache_compile_file($file)) {
+                $optimized++;
             }
         });
 
