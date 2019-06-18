@@ -51,8 +51,10 @@ php artisan opcache:status
 
 Pre-compile your application code:
 ``` bash
-php artisan opcache:optimize
+php artisan opcache:compile {--force}
 ```
+Note: `opcache.dups_fix `must be enabled, or use the `--force` flag.
+If you run into "Cannot redeclare class" errors, enable `opcache.dups_fix` or add the class path to the exclude list.
 
 Programmatic usage:
 
