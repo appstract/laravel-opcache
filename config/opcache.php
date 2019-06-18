@@ -2,6 +2,7 @@
 
 return [
     'url' => env('OPCACHE_URL', config('app.url')),
+    'prefix' => 'opcache-api',
     'verify_ssl' => true,
     'headers' => [],
     'directories' => [
