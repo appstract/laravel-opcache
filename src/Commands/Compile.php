@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Appstract\Opcache\CreatesRequest;
 use Appstract\LushHttp\Exception\LushRequestException;
 
-class Optimize extends Command
+class Compile extends Command
 {
     use CreatesRequest;
 
@@ -15,7 +15,7 @@ class Optimize extends Command
      *
      * @var string
      */
-    protected $signature = 'opcache:optimize';
+    protected $signature = 'opcache:compile {--force}';
 
     /**
      * The console command description.
@@ -33,9 +33,12 @@ class Optimize extends Command
         try {
             $this->line('Compiling scripts...');
 
-            $response = $this->sendRequest('optimize');
+            $response = $this->sendRequest('compile', ['force' => $this->option('force') ?? false]);
 
-            if ($response->result) {
+            if (isset($response->result->message)) {
+                $this->warn($response->result->message);
+            }
+            else if ($response->result) {
                 $this->info(sprintf('%s of %s files compiled', $response->result->compiled_count, $response->result->total_files_count));
             } else {
                 $this->error('OPcache not configured');

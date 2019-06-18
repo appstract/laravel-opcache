@@ -3,6 +3,7 @@
 namespace Appstract\Opcache\Http\Controllers;
 
 use Appstract\Opcache\OpcacheFacade as OPcache;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
@@ -41,12 +42,12 @@ class OpcacheController extends BaseController
     }
 
     /**
-     * Optimize.
+     * Compile.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function optimize()
+    public function compile(Request $request)
     {
-        return response()->json(['result' => OPcache::optimize()]);
+        return response()->json(['result' => OPcache::compile($request->get('force'))]);
     }
 }

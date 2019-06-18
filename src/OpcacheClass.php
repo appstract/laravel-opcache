@@ -43,8 +43,12 @@ class OpcacheClass
     /**
      * Pre-compile php scripts.
      */
-    public function optimize()
+    public function compile($force = false)
     {
+        if (!ini_get('opcache.dups_fix') && !$force) {
+            return ['message' => 'opcache.dups_fix must be enabled, or run with --force'];
+        }
+
         if (function_exists('opcache_compile_file')) {
             $compiled = 0;
 

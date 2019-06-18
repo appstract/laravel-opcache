@@ -9,15 +9,15 @@ trait CreatesRequest
 {
     /**
      * @param $url
-     *
+     * @param $parameters
      * @return mixed
      */
-    public function sendRequest($url)
+    public function sendRequest($url, $parameters = [])
     {
         return Lush::headers(config('opcache.headers'))
             ->options(['verify_ssl' => config('opcache.verify_ssl')])
             ->get(config('opcache.url').'/opcache-api/'.$url,
-            ['key' => Crypt::encrypt('opcache')]
+            array_merge(['key' => Crypt::encrypt('opcache')], $parameters)
         );
     }
 }

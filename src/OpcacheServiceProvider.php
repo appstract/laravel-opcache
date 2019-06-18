@@ -16,7 +16,7 @@ class OpcacheServiceProvider extends ServiceProvider
                 Commands\Clear::class,
                 Commands\Config::class,
                 Commands\Status::class,
-                Commands\Optimize::class,
+                Commands\Compile::class,
             ]);
 
             $this->publishes([
