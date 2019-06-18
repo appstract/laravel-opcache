@@ -13,4 +13,9 @@ return [
         base_path('storage'),
         base_path('vendor'),
     ],
+    'exclude' => [
+        'tests',
+        'stubs',
+        'Dumper'
+    ]
 ];

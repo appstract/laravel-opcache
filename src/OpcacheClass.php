@@ -51,7 +51,8 @@ class OpcacheClass
             // Get files in these paths
             $files = collect(Finder::create()->in(config('opcache.directories'))
                 ->name('*.php')
-                ->exclude(['tests', 'stubs', 'sebastian/resource-operations'])
+                ->notContains('#!/usr/bin/env php')
+                ->exclude(config('opcache.exclude'))
                 ->files());
 
             // optimized files
