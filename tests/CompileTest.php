@@ -4,15 +4,15 @@ namespace Appstract\Opcache\Test;
 
 use Artisan;
 
-class OptimizeTest extends TestCase
+class CompileTest extends TestCase
 {
     /** @test */
     public function optimizes()
     {
-        Artisan::call('opcache:optimize', []);
+        Artisan::call('opcache:compile --force', []);
 
         $output = Artisan::output();
 
-        $this->assertContains('files optimized', $output);
+        $this->assertContains('files compiled', $output);
     }
 }

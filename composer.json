@@ -26,8 +26,8 @@
         "appstract/lush-http": "^0.5"
     },
     "require-dev": {
-        "orchestra/testbench": "^3.3",
-        "phpunit/phpunit": "5.*"
+        "orchestra/testbench": "^3.8",
+        "phpunit/phpunit": "^7.5"
     },
     "autoload": {
         "psr-4": {

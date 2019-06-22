@@ -13,9 +13,8 @@ class StatusTest extends TestCase
 
         $output = Artisan::output();
 
-        $this->assertContains('General', $output);
-        $this->assertContains('Memory usage', $output);
-        $this->assertContains('Interned strings usage', $output);
-        $this->assertContains('Statistics', $output);
+        $this->assertContains('Memory usage:', $output);
+        $this->assertContains('Interned strings usage:', $output);
+        $this->assertContains('Statistics:', $output);
     }
 }
