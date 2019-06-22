@@ -22,7 +22,7 @@ class Config extends Command
      *
      * @var string
      */
-    protected $description = 'Show your opcode cache configuration';
+    protected $description = 'Show your OPcache configuration';
 
     /**
      * Execute the console command.
@@ -36,12 +36,12 @@ class Config extends Command
 
             if ($response->result) {
                 $this->line('Version info:');
-                $this->table(['key', 'value'], $this->parseTable($response->result->version));
+                $this->table([], $this->parseTable($response->result->version));
 
                 $this->line(PHP_EOL.'Configuration info:');
-                $this->table(['option', 'value'], $this->parseTable($response->result->directives));
+                $this->table([], $this->parseTable($response->result->directives));
             } else {
-                $this->error('No OPcache configuration found');
+                $this->error('OPcache not configured');
             }
         } catch (LushRequestException $e) {
             $this->error($e->getMessage());
@@ -65,6 +65,8 @@ class Config extends Command
 
             if (in_array($key, $bytes)) {
                 $value = number_format($value / 1048576, 2).' MB';
+            } elseif (is_bool($value)) {
+                $value = $value ? 'true' : 'false';
             }
 
             return [

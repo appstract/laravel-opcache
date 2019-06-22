@@ -22,7 +22,7 @@ class Clear extends Command
      *
      * @var string
      */
-    protected $description = 'Clear the opcode cache';
+    protected $description = 'Clear OPCache';
 
     /**
      * Execute the console command.
@@ -35,9 +35,9 @@ class Clear extends Command
             $response = $this->sendRequest('clear');
 
             if ($response->result === true) {
-                $this->info('Opcode cache cleared');
+                $this->info('OPcache cleared');
             } else {
-                $this->line('Opcode cache: Nothing to clear');
+                $this->error('OPcache not configured');
             }
         } catch (LushRequestException $e) {
             $this->error($e->getMessage());

@@ -9,90 +9,67 @@ use Symfony\Component\Finder\Finder;
  */
 class OpcacheClass
 {
-    /**
-     * OpcacheClass constructor.
-     */
-    public function __construct()
-    {
-        // constructor body
-    }
 
     /**
-     * Clear the cache.
-     *
-     * @return bool
+     * Clear OPcache.
      */
     public function clear()
     {
         if (function_exists('opcache_reset')) {
             return opcache_reset();
         }
-
-        return false;
     }
 
     /**
      * Get configuration values.
-     *
-     * @return mixed
      */
     public function getConfig()
     {
         if (function_exists('opcache_get_configuration')) {
-            $config = opcache_get_configuration();
-
-            return $config ?: false;
+            return opcache_get_configuration();
         }
-
-        return false;
     }
 
     /**
      * Get status info.
-     *
-     * @return mixed
      */
     public function getStatus()
     {
         if (function_exists('opcache_get_status')) {
-            $status = opcache_get_status(false);
-
-            return $status ?: false;
+            return opcache_get_status(false);
         }
-
-        return false;
     }
 
     /**
-     * Precompile app.
-     *
-     * @return bool | array
+     * Pre-compile php scripts.
      */
     public function optimize()
     {
-        if (! function_exists('opcache_compile_file')) {
-            return false;
+        if (function_exists('opcache_compile_file')) {
+            $compiled = 0;
+
+            // Get files in these paths
+            $files = collect(Finder::create()->in(config('opcache.directories'))
+                ->name('*.php')
+                ->notContains('#!/usr/bin/env php')
+                ->exclude(config('opcache.exclude'))
+                ->files());
+
+            // optimized files
+            $files->each(function ($file) use (&$compiled) {
+                try {
+                    if (!opcache_is_script_cached($file)) {
+                        opcache_compile_file($file);
+                    }
+
+                    $compiled++;
+                } catch (\Exception $e) {}
+            });
+
+            return [
+                'total_files_count' => $files->count(),
+                'compiled_count' => $compiled,
+            ];
         }
-
-        // Get files in these paths
-        $files = Finder::create()->in(config('opcache.directories'))
-            ->name('*.php')
-            ->files();
-
-        $files = collect($files);
-
-        // optimized files
-        $optimized = 0;
-
-        $files->each(function ($file) use (&$optimized) {
-            if (!opcache_is_script_cached($file) && @opcache_compile_file($file)) {
-                $optimized++;
-            }
-        });
-
-        return [
-            'total_files_count' => $files->count(),
-            'compiled_count'    => $optimized,
-        ];
     }
 }

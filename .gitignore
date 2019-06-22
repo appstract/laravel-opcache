@@ -1,4 +1,5 @@
 *.sublime-*
+.idea
 build
 composer.lock
 docs
