@@ -12,6 +12,8 @@ This package contains some useful Artisan commands to work with PHP OPcache.
 This package requires Laravel 5.8 or newer.
 For older Laravel versions (5.5 or newer), you can use version 2.
 
+⚠ If you upgraded from version 2, change the command `opcache:optimize` with `opcache:compile {--force}` 
+
 ## Installation
 
 You can install the package via Composer:
