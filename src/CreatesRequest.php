@@ -10,13 +10,13 @@ trait CreatesRequest
     /**
      * @param $url
      * @param $parameters
-     * @return mixed
+     * @return \Appstract\LushHttp\Response\LushResponse
      */
     public function sendRequest($url, $parameters = [])
     {
         return Lush::headers(config('opcache.headers'))
             ->options(['verify_ssl' => config('opcache.verify_ssl')])
-            ->get(config('opcache.url').'/opcache-api/'.$url,
+            ->get(config('opcache.url').'/'. config('opcache.prefix') . '/'.$url,
             array_merge(['key' => Crypt::encrypt('opcache')], $parameters)
         );
     }
