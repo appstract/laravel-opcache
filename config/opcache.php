@@ -15,8 +15,14 @@ return [
         base_path('vendor'),
     ],
     'exclude' => [
+        'test',
+        'Test',
         'tests',
+        'Tests',
+        'stub',
+        'Stub',
         'stubs',
-        'Dumper'
+        'Stubs',
+        'Dumper',
     ]
 ];
