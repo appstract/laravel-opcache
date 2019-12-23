@@ -55,7 +55,11 @@ class Status extends Command
     protected function displayTables($data)
     {
         $general = (array) $data;
-        unset($general['memory_usage'], $general['interned_strings_usage'], $general['opcache_statistics']);
+
+        foreach(['memory_usage', 'interned_strings_usage', 'opcache_statistics', 'preload_statistics'] as $unset) {
+            unset($general[$unset]);
+        }
+
         $this->table([], $this->parseTable($general));
 
         $this->line(PHP_EOL.'Memory usage:');
@@ -69,6 +73,11 @@ class Status extends Command
         if (isset($data->interned_strings_usage)) {
             $this->line(PHP_EOL.'Interned strings usage:');
             $this->table([], $this->parseTable($data->interned_strings_usage));
+        }
+
+        if (isset($data->preload_statistics)) {
+            $this->line(PHP_EOL.'Preload statistics:');
+            $this->table([], $this->parseTable($data->preload_statistics));
         }
     }
 
@@ -97,7 +106,7 @@ class Status extends Command
 
             return [
                 'key' => $key,
-                'value' => $value,
+                'value' => is_array($value) ? implode(PHP_EOL, $value) : $value,
             ];
         }, array_keys($input), $input);
     }
