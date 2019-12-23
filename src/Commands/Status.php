@@ -35,14 +35,15 @@ class Status extends Command
             $response = $this->sendRequest('status');
 
             if ($response->result) {
-//                dd($response->result);
                 $this->displayTables($response->result);
             } else {
                 $this->error('OPcache not configured');
+                return 2;
             }
         } catch (LushRequestException $e) {
             $this->error($e->getMessage());
             $this->error('Url: '.$e->getRequest()->getUrl());
+            return $e->getCode();
         }
     }
 

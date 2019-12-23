@@ -42,10 +42,12 @@ class Config extends Command
                 $this->table([], $this->parseTable($response->result->directives));
             } else {
                 $this->error('OPcache not configured');
+                return 2;
             }
         } catch (LushRequestException $e) {
             $this->error($e->getMessage());
             $this->error('Url: '.$e->getRequest()->getUrl());
+            return $e->getCode();
         }
     }
 

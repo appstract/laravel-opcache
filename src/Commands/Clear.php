@@ -38,10 +38,12 @@ class Clear extends Command
                 $this->info('OPcache cleared');
             } else {
                 $this->error('OPcache not configured');
+                return 2;
             }
         } catch (LushRequestException $e) {
             $this->error($e->getMessage());
             $this->error('Url: '.$e->getRequest()->getUrl());
+            return $e->getCode();
         }
     }
 }
