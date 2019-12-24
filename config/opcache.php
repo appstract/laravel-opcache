@@ -4,6 +4,7 @@ return [
     'url' => env('OPCACHE_URL', config('app.url')),
     'prefix' => 'opcache-api',
     'verify_ssl' => true,
+    'verify_host' => true,
     'headers' => [],
     'directories' => [
         base_path('app'),
