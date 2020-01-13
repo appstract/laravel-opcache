@@ -2,9 +2,9 @@
 
 namespace Appstract\Opcache\Commands;
 
-use Illuminate\Console\Command;
-use Appstract\Opcache\CreatesRequest;
 use Appstract\LushHttp\Exception\LushRequestException;
+use Appstract\Opcache\CreatesRequest;
+use Illuminate\Console\Command;
 
 class Status extends Command
 {
@@ -38,11 +38,13 @@ class Status extends Command
                 $this->displayTables($response->result);
             } else {
                 $this->error('OPcache not configured');
+
                 return 2;
             }
         } catch (LushRequestException $e) {
             $this->error($e->getMessage());
             $this->error('Url: '.$e->getRequest()->getUrl());
+
             return $e->getCode();
         }
     }
@@ -56,7 +58,7 @@ class Status extends Command
     {
         $general = (array) $data;
 
-        foreach(['memory_usage', 'interned_strings_usage', 'opcache_statistics', 'preload_statistics'] as $unset) {
+        foreach (['memory_usage', 'interned_strings_usage', 'opcache_statistics', 'preload_statistics'] as $unset) {
             unset($general[$unset]);
         }
 
@@ -94,8 +96,7 @@ class Status extends Command
         $bytes = ['used_memory', 'free_memory', 'wasted_memory', 'buffer_size'];
         $times = ['start_time', 'last_restart_time'];
 
-        return array_map(function ($key, $value) use ($bytes, $times){
-
+        return array_map(function ($key, $value) use ($bytes, $times) {
             if (in_array($key, $bytes)) {
                 $value = number_format($value / 1048576, 2).' MB';
             } elseif (in_array($key, $times)) {

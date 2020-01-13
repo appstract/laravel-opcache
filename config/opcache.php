@@ -25,6 +25,6 @@ return [
         'stubs',
         'Stubs',
         'dumper',
-        'Dumper'
-    ]
+        'Dumper',
+    ],
 ];
