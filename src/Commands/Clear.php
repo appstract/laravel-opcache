@@ -2,9 +2,9 @@
 
 namespace Appstract\Opcache\Commands;
 
-use Illuminate\Console\Command;
-use Appstract\Opcache\CreatesRequest;
 use Appstract\LushHttp\Exception\LushRequestException;
+use Appstract\Opcache\CreatesRequest;
+use Illuminate\Console\Command;
 
 class Clear extends Command
 {
@@ -38,11 +38,13 @@ class Clear extends Command
                 $this->info('OPcache cleared');
             } else {
                 $this->error('OPcache not configured');
+
                 return 2;
             }
         } catch (LushRequestException $e) {
             $this->error($e->getMessage());
             $this->error('Url: '.$e->getRequest()->getUrl());
+
             return $e->getCode();
         }
     }
