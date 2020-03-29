@@ -2,7 +2,6 @@
 
 namespace Appstract\Opcache\Commands;
 
-use Appstract\LushHttp\Exception\LushRequestException;
 use Appstract\Opcache\CreatesRequest;
 use Illuminate\Console\Command;
 
@@ -29,7 +28,6 @@ class Compile extends Command
      */
     public function handle()
     {
-
         $this->line('Compiling scripts...');
 
         $response = $this->sendRequest('compile', ['force' => $this->option('force') ?? false]);
@@ -37,11 +35,13 @@ class Compile extends Command
 
         if (isset($response['result']['message'])) {
             $this->warn($response['result']['message']);
+
             return 1;
         } elseif ($response['result']) {
             $this->info(sprintf('%s of %s files compiled', $response['result']['compiled_count'], $response['result']['total_files_count']));
         } else {
             $this->error('OPcache not configured');
+
             return 2;
         }
     }

@@ -2,7 +2,6 @@
 
 namespace Appstract\Opcache\Commands;
 
-use Appstract\LushHttp\Exception\LushRequestException;
 use Appstract\Opcache\CreatesRequest;
 use Illuminate\Console\Command;
 
@@ -42,6 +41,7 @@ class Config extends Command
             $this->table([], $this->parseTable($response['result']['directives']));
         } else {
             $this->error('OPcache not configured');
+
             return 2;
         }
     }

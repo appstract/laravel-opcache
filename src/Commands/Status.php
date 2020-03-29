@@ -2,7 +2,6 @@
 
 namespace Appstract\Opcache\Commands;
 
-use Appstract\LushHttp\Exception\LushRequestException;
 use Appstract\Opcache\CreatesRequest;
 use Illuminate\Console\Command;
 
@@ -38,6 +37,7 @@ class Status extends Command
             $this->displayTables($response['result']);
         } else {
             $this->error('OPcache not configured');
+
             return 2;
         }
     }

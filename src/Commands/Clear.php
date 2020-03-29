@@ -37,6 +37,7 @@ class Clear extends Command
             $this->info('OPcache cleared');
         } else {
             $this->error('OPcache not configured');
+
             return 2;
         }
     }

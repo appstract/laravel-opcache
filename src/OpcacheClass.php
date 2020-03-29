@@ -39,7 +39,6 @@ class OpcacheClass
         }
     }
 
-
     /**
      * Pre-compile php scripts.
      *
