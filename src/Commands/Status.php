@@ -57,7 +57,6 @@ class Status extends Command
 
         $this->table([], $this->parseTable($general));
 
-
         $this->line(PHP_EOL.'Memory usage:');
         $this->table([], $this->parseTable($data['memory_usage']));
 
