@@ -9,10 +9,7 @@ This package contains some useful Artisan commands to work with PHP OPcache.
 #### If you want to learn more about OPcache and what it can do for your Laravel application, [read the article on Medium](https://medium.com/appstract/make-your-laravel-app-fly-with-php-opcache-9948db2a5f93#.bjrpj4h1c).
 
 ## Requirements
-This package requires Laravel 5.8 or newer.
-For older Laravel versions (5.5 or newer), you can use version 2.
-
-⚠ If you upgraded from version 2, change the command `opcache:optimize` with `opcache:compile {--force}` 
+This package requires Laravel 7 or newer.
 
 ## Installation
 
@@ -29,12 +26,11 @@ php artisan vendor:publish --provider="Appstract\Opcache\OpcacheServiceProvider"
 ```
 
 Make sure your APP_URL is set correctly in .env.
+
 If you want to set a different url to call the OPcache routes (for use with a load balancer for example),
 you can set OPCACHE_URL.
 
 ## Usage
-Login to your server/vm and run one of the commands.
-##### Requests are only excepted from the same IP as the server IP.
 
 Clear OPcache:
 ``` bash
