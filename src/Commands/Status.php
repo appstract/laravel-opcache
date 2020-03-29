@@ -49,7 +49,7 @@ class Status extends Command
      */
     protected function displayTables($data)
     {
-        $general = (array) $data;
+        $general = $data;
 
         foreach (['memory_usage', 'interned_strings_usage', 'opcache_statistics', 'preload_statistics'] as $unset) {
             unset($general[$unset]);
@@ -57,20 +57,21 @@ class Status extends Command
 
         $this->table([], $this->parseTable($general));
 
+
         $this->line(PHP_EOL.'Memory usage:');
         $this->table([], $this->parseTable($data['memory_usage']));
 
-        if (isset($data->opcache_statistics)) {
+        if (isset($data['opcache_statistics'])) {
             $this->line(PHP_EOL.'Statistics:');
             $this->table([], $this->parseTable($data['opcache_statistics']));
         }
 
-        if (isset($data->interned_strings_usage)) {
+        if (isset($data['interned_strings_usage'])) {
             $this->line(PHP_EOL.'Interned strings usage:');
             $this->table([], $this->parseTable($data['interned_strings_usage']));
         }
 
-        if (isset($data->preload_statistics)) {
+        if (isset($data['preload_statistics'])) {
             $this->line(PHP_EOL.'Preload statistics:');
             $this->table([], $this->parseTable($data['preload_statistics']));
         }
