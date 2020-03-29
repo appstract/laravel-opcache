@@ -12,8 +12,8 @@ abstract class TestCase extends Orchestra
      */
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('app.url', 'http://laravel58.test/');
-        $app['config']->set('opcache.url', 'http://laravel58.test/');
+        $app['config']->set('app.url', 'http://laravel7.test/');
+        $app['config']->set('opcache.url', 'http://laravel7.test/');
         $app['config']->set('app.key', 'base64:Ed0VpanUWokW8AgY8jRCU8A5Cn3ou+uby8qLCQysUpg=');
     }
 

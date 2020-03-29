@@ -23,8 +23,8 @@
         "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
-        "orchestra/testbench": "^3.8",
-        "phpunit/phpunit": "^7.5"
+        "orchestra/testbench": "^5.0",
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "psr-4": {

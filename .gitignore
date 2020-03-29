@@ -4,3 +4,4 @@ build
 composer.lock
 docs
 vendor
+/.phpunit.result.cache
