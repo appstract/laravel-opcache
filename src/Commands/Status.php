@@ -31,21 +31,14 @@ class Status extends Command
      */
     public function handle()
     {
-        try {
-            $response = $this->sendRequest('status');
+        $response = $this->sendRequest('status');
+        $response->throw();
 
-            if ($response->result) {
-                $this->displayTables($response->result);
-            } else {
-                $this->error('OPcache not configured');
-
-                return 2;
-            }
-        } catch (LushRequestException $e) {
-            $this->error($e->getMessage());
-            $this->error('Url: '.$e->getRequest()->getUrl());
-
-            return $e->getCode();
+        if ($response['result']) {
+            $this->displayTables($response['result']);
+        } else {
+            $this->error('OPcache not configured');
+            return 2;
         }
     }
 
@@ -65,21 +58,21 @@ class Status extends Command
         $this->table([], $this->parseTable($general));
 
         $this->line(PHP_EOL.'Memory usage:');
-        $this->table([], $this->parseTable($data->memory_usage));
+        $this->table([], $this->parseTable($data['memory_usage']));
 
         if (isset($data->opcache_statistics)) {
             $this->line(PHP_EOL.'Statistics:');
-            $this->table([], $this->parseTable($data->opcache_statistics));
+            $this->table([], $this->parseTable($data['opcache_statistics']));
         }
 
         if (isset($data->interned_strings_usage)) {
             $this->line(PHP_EOL.'Interned strings usage:');
-            $this->table([], $this->parseTable($data->interned_strings_usage));
+            $this->table([], $this->parseTable($data['interned_strings_usage']));
         }
 
         if (isset($data->preload_statistics)) {
             $this->line(PHP_EOL.'Preload statistics:');
-            $this->table([], $this->parseTable($data->preload_statistics));
+            $this->table([], $this->parseTable($data['preload_statistics']));
         }
     }
 

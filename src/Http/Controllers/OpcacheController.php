@@ -44,6 +44,7 @@ class OpcacheController extends BaseController
     /**
      * Compile.
      *
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function compile(Request $request)

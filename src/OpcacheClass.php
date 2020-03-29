@@ -39,8 +39,12 @@ class OpcacheClass
         }
     }
 
+
     /**
      * Pre-compile php scripts.
+     *
+     * @param bool $force
+     * @return array
      */
     public function compile($force = false)
     {

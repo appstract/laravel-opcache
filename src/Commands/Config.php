@@ -31,25 +31,18 @@ class Config extends Command
      */
     public function handle()
     {
-        try {
-            $response = $this->sendRequest('config');
+        $response = $this->sendRequest('config');
+        $response->throw();
 
-            if ($response->result) {
-                $this->line('Version info:');
-                $this->table([], $this->parseTable($response->result->version));
+        if ($response['result']) {
+            $this->line('Version info:');
+            $this->table([], $this->parseTable($response['result']['version']));
 
-                $this->line(PHP_EOL.'Configuration info:');
-                $this->table([], $this->parseTable($response->result->directives));
-            } else {
-                $this->error('OPcache not configured');
-
-                return 2;
-            }
-        } catch (LushRequestException $e) {
-            $this->error($e->getMessage());
-            $this->error('Url: '.$e->getRequest()->getUrl());
-
-            return $e->getCode();
+            $this->line(PHP_EOL.'Configuration info:');
+            $this->table([], $this->parseTable($response['result']['directives']));
+        } else {
+            $this->error('OPcache not configured');
+            return 2;
         }
     }
 

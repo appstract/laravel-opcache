@@ -1,6 +1,6 @@
 {
     "name": "appstract/laravel-opcache",
-    "description": "OPcache helper for Laravel.",
+    "description": "PHP OPcache Artisan commands for Laravel.",
     "keywords": [
         "appstract",
         "opcache",
@@ -18,12 +18,9 @@
         }
     ],
     "require": {
-        "php": "^7.1.3",
-        "illuminate/console": ">=5.8",
-        "illuminate/support": ">=5.8",
-        "illuminate/routing": ">=5.8",
-        "illuminate/filesystem": ">=5.8",
-        "appstract/lush-http": "^0.5"
+        "php": "^7.2.5",
+        "laravel/framework": ">=7.0",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "orchestra/testbench": "^3.8",

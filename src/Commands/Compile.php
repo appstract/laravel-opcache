@@ -29,27 +29,20 @@ class Compile extends Command
      */
     public function handle()
     {
-        try {
-            $this->line('Compiling scripts...');
 
-            $response = $this->sendRequest('compile', ['force' => $this->option('force') ?? false]);
+        $this->line('Compiling scripts...');
 
-            if (isset($response->result->message)) {
-                $this->warn($response->result->message);
+        $response = $this->sendRequest('compile', ['force' => $this->option('force') ?? false]);
+        $response->throw();
 
-                return 1;
-            } elseif ($response->result) {
-                $this->info(sprintf('%s of %s files compiled', $response->result->compiled_count, $response->result->total_files_count));
-            } else {
-                $this->error('OPcache not configured');
-
-                return 2;
-            }
-        } catch (LushRequestException $e) {
-            $this->error($e->getMessage());
-            $this->error('Url: '.$e->getRequest()->getUrl());
-
-            return $e->getCode();
+        if (isset($response['result']['message'])) {
+            $this->warn($response['result']['message']);
+            return 1;
+        } elseif ($response['result']) {
+            $this->info(sprintf('%s of %s files compiled', $response['result']['compiled_count'], $response['result']['total_files_count']));
+        } else {
+            $this->error('OPcache not configured');
+            return 2;
         }
     }
 }
