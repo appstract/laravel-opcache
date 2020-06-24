@@ -16,7 +16,7 @@ trait CreatesRequest
     {
         return Http::withHeaders(config('opcache.headers'))
             ->withOptions(['verify' => config('opcache.verify')])
-            ->get(config('opcache.url').'/'.config('opcache.prefix').'/'.$url,
+            ->get(rtrim(config('opcache.url'), '/').'/'.trim(config('opcache.prefix'), '/').'/'.ltrim($url, '/'),
                 array_merge(['key' => Crypt::encrypt('opcache')], $parameters)
         );
     }
