@@ -25,5 +25,6 @@ return [
         'Stubs',
         'dumper',
         'Dumper',
+        'Autoload',
     ],
 ];
