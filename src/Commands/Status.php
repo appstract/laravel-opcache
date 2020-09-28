@@ -37,7 +37,6 @@ class Status extends Command
             $this->error('OPcache not configured');
 
             return 2;
-
         }
 
         $this->displayTables($response['result']);
@@ -107,22 +106,18 @@ class Status extends Command
         $times = ['start_time', 'last_restart_time'];
 
         if (in_array($key, $bytes)) {
-
             return number_format($value / 1048576, 2).' MB';
         }
 
         if (in_array($key, $times)) {
-
             return date('Y-m-d H:i:s', $value);
         }
 
         if (is_bool($value)) {
-
             return $value ? 'true' : 'false';
         }
 
         if (is_array($value)) {
-
             return implode(PHP_EOL, $value);
         }
 
