@@ -10,14 +10,22 @@ trait CreatesRequest
     /**
      * @param $url
      * @param $parameters
-     * @return \Appstract\LushHttp\Response\LushResponse
+     * @return \Illuminate\Http\Client\Response
      */
     public function sendRequest($url, $parameters = [])
     {
         return Http::withHeaders(config('opcache.headers'))
             ->withOptions(['verify' => config('opcache.verify')])
-            ->get(rtrim(config('opcache.url'), '/').'/'.trim(config('opcache.prefix'), '/').'/'.ltrim($url, '/'),
+            ->get($this->buildEndpoint($url),
                 array_merge(['key' => Crypt::encrypt('opcache')], $parameters)
         );
+    }
+
+    /**
+     * @param string $url
+     * @return string
+     */
+    protected function buildEndpoint(string $url): string {
+        return rtrim(config('opcache.url'), '/').'/'.trim(config('opcache.prefix'), '/').'/'.ltrim($url, '/');
     }
 }
