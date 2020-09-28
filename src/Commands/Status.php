@@ -33,8 +33,9 @@ class Status extends Command
         $response = $this->sendRequest('status');
         $response->throw();
 
-        if (!$response['result']) {
+        if (! $response->successful()) {
             $this->error('OPcache not configured');
+
             return 2;
 
         }
@@ -90,7 +91,7 @@ class Status extends Command
         return array_map(function ($key, $value) {
             return [
                 'key' => $key,
-                'value' =>  $this->parseValue($key, $value)
+                'value' =>  $this->parseValue($key, $value),
             ];
         }, array_keys($input), $input);
     }
@@ -100,23 +101,28 @@ class Status extends Command
      * @param $value
      * @return string
      */
-    protected function parseValue($key, $value) {
+    protected function parseValue($key, $value)
+    {
         $bytes = ['used_memory', 'free_memory', 'wasted_memory', 'buffer_size'];
         $times = ['start_time', 'last_restart_time'];
 
         if (in_array($key, $bytes)) {
+
             return number_format($value / 1048576, 2).' MB';
         }
 
         if (in_array($key, $times)) {
+
             return date('Y-m-d H:i:s', $value);
         }
 
         if (is_bool($value)) {
+
             return $value ? 'true' : 'false';
         }
 
-        if(is_array($value)) {
+        if (is_array($value)) {
+
             return implode(PHP_EOL, $value);
         }
 

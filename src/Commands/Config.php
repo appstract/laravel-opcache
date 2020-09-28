@@ -33,8 +33,9 @@ class Config extends Command
         $response = $this->sendRequest('config');
         $response->throw();
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             $this->error('OPcache not configured');
+
             return 2;
         }
 
@@ -68,10 +69,12 @@ class Config extends Command
      * @param $value
      * @return string
      */
-    protected function parseValue($key, $value) {
+    protected function parseValue($key, $value)
+    {
         if (in_array($key, ['opcache.memory_consumption'])) {
             return number_format($value / 1048576, 2).' MB';
         }
+
         return $value ? 'true' : 'false';
     }
 }

@@ -68,6 +68,7 @@ class OpcacheClass
                     return false;
                 }
                 @opcache_compile_file($file);
+
                 return true;
             });
 

@@ -25,7 +25,8 @@ trait CreatesRequest
      * @param string $url
      * @return string
      */
-    protected function buildEndpoint(string $url): string {
+    protected function buildEndpoint(string $url): string
+    {
         return rtrim(config('opcache.url'), '/').'/'.trim(config('opcache.prefix'), '/').'/'.ltrim($url, '/');
     }
 }
