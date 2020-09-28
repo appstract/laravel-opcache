@@ -52,7 +52,6 @@ class OpcacheClass
         }
 
         if (function_exists('opcache_compile_file')) {
-            $compiled = 0;
 
             // Get files in these paths
             $files = collect(Finder::create()->in(config('opcache.directories'))
@@ -64,20 +63,17 @@ class OpcacheClass
                 ->followLinks());
 
             // optimized files
-            $files->each(function ($file) use (&$compiled) {
-                try {
-                    if (! opcache_is_script_cached($file)) {
-                        opcache_compile_file($file);
-                    }
-
-                    $compiled++;
-                } catch (\Exception $e) {
+            $compiled = $files->filter(function ($file) {
+                if (opcache_is_script_cached($file)) {
+                    return false;
                 }
+                @opcache_compile_file($file);
+                return true;
             });
 
             return [
                 'total_files_count' => $files->count(),
-                'compiled_count' => $compiled,
+                'compiled_count' => $compiled->count(),
             ];
         }
     }

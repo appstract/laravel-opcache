@@ -33,13 +33,13 @@ class Status extends Command
         $response = $this->sendRequest('status');
         $response->throw();
 
-        if ($response['result']) {
-            $this->displayTables($response['result']);
-        } else {
+        if (!$response['result']) {
             $this->error('OPcache not configured');
-
             return 2;
+
         }
+
+        $this->displayTables($response['result']);
     }
 
     /**
@@ -86,22 +86,40 @@ class Status extends Command
     protected function parseTable($input)
     {
         $input = (array) $input;
+
+        return array_map(function ($key, $value) {
+            return [
+                'key' => $key,
+                'value' =>  $this->parseValue($key, $value)
+            ];
+        }, array_keys($input), $input);
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return string
+     */
+    protected function parseValue($key, $value) {
         $bytes = ['used_memory', 'free_memory', 'wasted_memory', 'buffer_size'];
         $times = ['start_time', 'last_restart_time'];
 
-        return array_map(function ($key, $value) use ($bytes, $times) {
-            if (in_array($key, $bytes)) {
-                $value = number_format($value / 1048576, 2).' MB';
-            } elseif (in_array($key, $times)) {
-                $value = date('Y-m-d H:i:s', $value);
-            } elseif (is_bool($value)) {
-                $value = $value ? 'true' : 'false';
-            }
+        if (in_array($key, $bytes)) {
+            return number_format($value / 1048576, 2).' MB';
+        }
 
-            return [
-                'key' => $key,
-                'value' => is_array($value) ? implode(PHP_EOL, $value) : $value,
-            ];
-        }, array_keys($input), $input);
+        if (in_array($key, $times)) {
+            return date('Y-m-d H:i:s', $value);
+        }
+
+        if (is_bool($value)) {
+            return $value ? 'true' : 'false';
+        }
+
+        if(is_array($value)) {
+            return implode(PHP_EOL, $value);
+        }
+
+        return $value;
     }
 }

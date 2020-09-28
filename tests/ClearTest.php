@@ -13,6 +13,6 @@ class ClearTest extends TestCase
 
         $output = Artisan::output();
 
-        $this->assertContains('cleared', $output);
+        $this->assertStringContainsString('cleared', $output);
     }
 }

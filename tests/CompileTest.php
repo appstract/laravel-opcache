@@ -13,6 +13,6 @@ class CompileTest extends TestCase
 
         $output = Artisan::output();
 
-        $this->assertContains('files compiled', $output);
+        $this->assertStringContainsString('files compiled', $output);
     }
 }
