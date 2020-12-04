@@ -13,7 +13,7 @@ class ConfigTest extends TestCase
 
         $output = Artisan::output();
 
-        $this->assertContains('Version info', $output);
-        $this->assertContains('Configuration info', $output);
+        $this->assertStringContainsString('Version info', $output);
+        $this->assertStringContainsString('Configuration info', $output);
     }
 }
