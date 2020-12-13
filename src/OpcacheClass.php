@@ -32,10 +32,10 @@ class OpcacheClass
     /**
      * Get status info.
      */
-    public function getStatus()
+    public function getStatus($get_scripts = false)
     {
         if (function_exists('opcache_get_status')) {
-            return opcache_get_status(false);
+            return opcache_get_status($get_scripts);
         }
     }
 
