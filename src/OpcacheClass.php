@@ -60,6 +60,7 @@ class OpcacheClass
                 ->ignoreUnreadableDirs()
                 ->notContains('#!/usr/bin/env php')
                 ->exclude(config('opcache.exclude'))
+                ->notName(config('opcache.notName'))
                 ->files()
                 ->followLinks());
 
