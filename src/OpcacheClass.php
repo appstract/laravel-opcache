@@ -53,6 +53,7 @@ class OpcacheClass
 
         if (function_exists('opcache_compile_file')) {
             $compiled = 0;
+            $uncompiled = [];
 
             // Get files in these paths
             $files = collect(Finder::create()->in(config('opcache.directories'))
@@ -71,13 +72,15 @@ class OpcacheClass
                     }
 
                     $compiled++;
-                } catch (\Exception $e) {
+                } catch (\Throwable $e) {
+                    $uncompiled[] = $file.':'.$e->getMessage();
                 }
             });
 
             return [
                 'total_files_count' => $files->count(),
                 'compiled_count' => $compiled,
+                'uncompiled_files' => $uncompiled,
             ];
         }
     }
